@@ -1,0 +1,98 @@
+<!--index.wxml-->
+<!-- <view class="weather-container">
+    <text class="weather-location">{{weather.location}}</text>
+    <text>{{weather.weather}}</text>
+    <image class="weather-icon" src="../../images/温度.png"></image>
+    <text>{{weather.degree}}</text>
+    <text>°</text> 
+</view> -->
+<wxs module="formattor">
+  module.exports = {
+    format: function (ms) {
+      var date = getDate(ms * 1000);
+      return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+    }
+  }
+</wxs>
+<view class="swiper-container">
+  <swiper class="swiper1" indicator-dots="true" indicator-active-color="#fff" autoplay circular>
+    <swiper-item>
+      <image src="../../images/skin5-desire.jpeg"></image>
+    </swiper-item>
+    <swiper-item>
+      <image src="../../images/skin5-buygive.jpeg"></image>
+    </swiper-item>
+    <swiper-item>
+      <image src="../../images/skin5-bargain.jpeg"></image>
+    </swiper-item>
+    <swiper-item>
+      <image src="../../images/skin5-seckill.jpeg"></image>
+    </swiper-item>
+    <swiper-item>
+      <image src="../../images/skin5-gp.jpeg"></image>
+    </swiper-item>
+  </swiper>
+</view>
+<view class="category-container">
+  <view class="category-box">
+    <view class="category-list" wx:for="{{categories}}" wx:key="id">
+      <view class="category-column" bindtap="tabClick" data-id="{{item.id}}" wx:if="{{item.id != 8}}">
+        <image mode="aspectFill" class="category-imgbox" src="{{item.icon}}"></image>
+        <view class="category-title">{{item.name}}</view>
+      </view>
+      <button class="category-column" open-type="contact" data-id="{{item.id}}" wx:if="{{item.id === 8}}" style="display: flex;flex-direction: column;align-items: center;padding: 0;">
+        <image mode="aspectFill" class="category-imgbox" src="{{item.icon}}"></image>
+        <view class="category-title">{{item.name}}</view>
+      </button>
+    </view>
+  </view>
+</view>
+<view class="notice-box" wx:if="{{noticeList}}">
+  <van-notice-bar mode="link" text="{{ noticeList.title }}" background="#FFFFFF" scrollable="true" speed="30" bind:click="goNotice">
+    <image slot="left-icon" class="notice-icon" src="../../images/notice.png"></image>
+  </van-notice-bar>
+</view>
+
+<view class="space"></view>
+<view class="professional-coach">
+  <van-divider custom-class="table-text" contentPosition="center">
+    <image class="table-icon" src="../../images/yoga.png"></image> 专业教练
+  </van-divider>
+  <view class="professional-coach-container">
+    <view class="professional-coach-item" wx:for="{{coachs}}">
+      <image class="professional-coach-thumbnail" src="{{item.thumbnail}}"></image>
+      <view class="professional-coach-title">
+        <text >{{item.teacherName}}</text>
+        <text class="professional-coach-type">（{{item.type}}）</text>
+      </view>
+      <text class="professional-coach-description">{{item.description}}</text>
+    </view>
+  </view>
+</view>
+
+<view class="space"></view>
+<view style="background: #fff;padding-bottom: 12rpx;color: #333;">
+  <van-divider custom-class="table-text" contentPosition="center">
+    <image class="table-icon" src="../../images/announcement.png"></image> 公告
+  </van-divider>
+  <view style="display: flex;margin:0 32rpx;flex-direction: column;">
+    <view style="font-size: 28rpx;display: flex;justify-content: space-between;margin:12rpx 0;" wx:for="{{announcements}}" data-id="{{item.id}}" bindtap="onAnnouncement">
+      <text>{{item.title}}</text>
+      <text style="color: #ccc;">{{formattor.format(item.updateAt)}}</text>
+    </view>
+  </view>
+</view>
+
+<view class="space"></view>
+<view style="background: #fff;padding-bottom: 12rpx;">
+  <van-divider custom-class="table-text" contentPosition="center">
+    <image class="table-icon" src="../../images/contact-us.png"></image> 联系我们
+  </van-divider>
+  <view style="display: flex;margin:0 32rpx;flex-direction: column;color: #333;">
+    <text style="font-size: 28rpx;">姓名：张三</text>
+    <text style="font-size: 28rpx;">电话：188666888</text>
+    <text style="font-size: 28rpx;">地址：湖南省长沙市望城区100号</text>
+  </view>
+</view>
+
+<view style="height: 32rpx;"></view>

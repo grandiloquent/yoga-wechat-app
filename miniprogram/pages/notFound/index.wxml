@@ -1,0 +1,4 @@
+<!--pages/notFound/index.wxml-->
+<view style="background: #fff; display: flex;align-items: center;padding: 48rpx;">
+      此功能正在筹建当中，敬请期待(*^_^*)
+    </view>

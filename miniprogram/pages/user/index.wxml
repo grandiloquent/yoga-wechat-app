@@ -1,0 +1,30 @@
+<!--pages/user/index.wxml-->
+<block wx:if="{{userStatus==1}}">
+  <view class="login-box">
+    <image class="logo" src="/images/wx.jpg" mode="widthFix"></image>
+    <view class="line"></view>
+    <view class="title">申请获取以下权限</view>
+    <view class="profile">获得你的公开信息(昵称，头像等)</view>
+    <view class="btn">
+      <van-button type="primary" block round bind:click="updateUserInfo">微信一键登录</van-button>
+    </view>
+  </view>
+</block>
+<block wx:if="{{userStatus == 2}}">
+  <view class="header-box">
+    <image class="avatar" src="{{ userInfo.avatarUrl }}" mode="aspectFill"></image>
+    <view class="r">
+      <view class="nick">{{ userInfo.nickName }}</view>
+    </view>
+  </view>
+  <van-cell-group title="管理员">
+    <van-cell is-link title="设置课程" link-type="navigateTo" url="/pages/adminAddCourse/index" />
+    <van-cell is-link title="管理预约" link-type="navigateTo" url="/pages/adminAddCourse/index" />
+    <van-cell is-link title="管理老师" link-type="navigateTo" url="/pages/adminAddCourse/index" />
+    <van-cell is-link title="管理学员" link-type="navigateTo" url="/pages/adminAddCourse/index" />
+    <van-cell is-link title="管理公告" link-type="navigateTo" url="/pages/adminAddCourse/index" />
+    <van-cell is-link title="管理活动" link-type="navigateTo" url="/pages/adminAddCourse/index" />
+    <van-cell is-link title="数据统计" link-type="navigateTo" url="/pages/adminAddCourse/index" />
+    <van-cell is-link title="配置程序" link-type="navigateTo" url="/pages/adminAddCourse/index" />
+  </van-cell-group>
+</block>

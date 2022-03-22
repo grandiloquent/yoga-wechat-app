@@ -1,0 +1,70 @@
+{
+    "pages": [
+        "pages/adminAddCourse/index",
+        "pages/index/index",
+        "pages/user/index",
+        "pages/appointment/index",
+        "pages/announcement/index",
+        "pages/checkIn/index",
+        "pages/notFound/index"
+    ],
+    "usingComponents": {
+        "van-notice-bar": "@vant/weapp/notice-bar/index",
+        "van-button": "@vant/weapp/button/index",
+        "van-divider": "@vant/weapp/divider/index",
+        "van-tab": "@vant/weapp/tab/index",
+        "van-tabs": "@vant/weapp/tabs/index",
+        "van-grid": "@vant/weapp/grid/index",
+        "van-grid-item": "@vant/weapp/grid-item/index",
+        "van-field": "@vant/weapp/field/index",
+        "van-popup": "@vant/weapp/popup/index",
+        "van-picker": "@vant/weapp/picker/index",
+        "van-picker-column": "@vant/weapp/picker-column/index",
+        "van-overlay": "@vant/weapp/overlay/index",
+        "van-transition": "@vant/weapp/transition/index",
+        "van-datetime-picker": "@vant/weapp/datetime-picker/index",
+        "van-collapse": "@vant/weapp/collapse/index",
+        "van-collapse-item": "@vant/weapp/collapse-item/index",
+        "van-cell": "@vant/weapp/cell/index",
+        "van-cell-group": "@vant/weapp/cell-group/index"
+    },
+    "window": {
+        "backgroundColor": "#F6F6F6",
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#F6F6F6",
+        "navigationBarTitleText": "瑜伽",
+        "navigationBarTextStyle": "black"
+    },
+    "sitemapLocation": "sitemap.json",
+    "lazyCodeLoading": "requiredComponents",
+    "tabBar": {
+        "color": "#8c8c8c",
+        "selectedColor": "#749b15",
+        "backgroundColor": "white",
+        "list": [{
+                "pagePath": "pages/index/index",
+                "text": "首页",
+                "iconPath": "images/home-off.png",
+                "selectedIconPath": "images/home-on.png"
+            },
+            {
+                "pagePath": "pages/appointment/index",
+                "text": "约课",
+                "iconPath": "images/yueke.png",
+                "selectedIconPath": "images/yueke-on.png"
+            },
+            {
+                "pagePath": "pages/checkIn/index",
+                "text": "已约",
+                "iconPath": "images/check-in.png",
+                "selectedIconPath": "images/check-in-on.png"
+            },
+            {
+                "pagePath": "pages/user/index",
+                "text": "我的",
+                "iconPath": "images/my-off.png",
+                "selectedIconPath": "images/my-on.png"
+            }
+        ]
+    }
+}

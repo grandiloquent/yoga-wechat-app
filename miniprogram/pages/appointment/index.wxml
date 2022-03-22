@@ -1,0 +1,43 @@
+<!--pages/appointment/index.wxml-->
+<wxs module="dateStylish">
+  module.exports = {
+    style: function (id, selected) {
+      if (id == selected) {
+        return 'background: #749b15;color:#fff;border-top-left-radius:6rpx;border-bottom-left-radius:6rpx;'
+      } if (id === 6) {
+        return 'background: #f3f3f3; border-top-right-radius:6rpx;border-bottom-right-radius:6rpx;'
+      } else {
+        return 'background:#f3f3f3;';
+      }
+    }
+  }
+</wxs>
+<van-tabs v-model:active="activeName">
+  <van-tab title="日课表" name="a">
+    <view style="display: grid;grid-template-columns: repeat(7,1fr);font-size: 24rpx;padding:24rpx;background: #fff;">
+      <view style="{{dateStylish.style(item.id,selected)}}width: 100%;display: flex;flex-direction: column;align-items: center;padding: 12rpx 0;" bindtap="onDateTap" data-time="{{item.time}}" wx:for="{{dates}}" wx:key="id" data-id="{{item.id}}">
+        <text>{{item.week}}</text>
+        <text style="font-size: 36rpx;padding: 8rpx 0;">{{item.day}}</text>
+        <text>{{item.month+1}}月</text>
+      </view>
+    </view>
+    <view class="space"></view>
+    <view style="display: flex;background: #fff;border-radius: 24rpx;padding: 24rpx;color: #888;font-size: 26rpx;margin-bottom: 20rpx;" wx:for="{{courses}}">
+      <view style="display: flex;flex-direction: column;flex-grow: 1;">
+        <text>{{item.startTime}}-{{item.endTime}}</text>
+        <text style="font-size: 36rpx;padding: 12rpx 0;color: #333;">{{item.courseName}}</text>
+        <text>{{item.teacher}}</text>
+        <text>还可以预约 {{item.maxPeoples}} 人</text>
+      </view>
+      <view style="display: flex;flex-direction: column;align-items: center;">
+        <image style="width: 120rpx;height: 120rpx;border-radius: 50%;border:1rpx solid #ccc;margin-bottom: 48rpx;" src="{{item.image}}"></image>
+        <button style="background: #749b15;font-size: 28rpx;border-radius: 28rpx;height: 56rpx;line-height: 56rpx;color: #fff;padding: 0 48rpx;">预约</button>
+      </view>
+    </view>
+  </van-tab>
+  <van-tab title="周课表" name="b">
+    <view style="background: #fff; display: flex;align-items: center;padding: 48rpx;">
+      此功能正在筹建当中，敬请期待(*^_^*)
+    </view>
+  </van-tab>
+</van-tabs>

@@ -1,0 +1,40 @@
+<!--pages/adminAddCourse/index.wxml-->
+<wxs module="format">
+    module.exports = {
+        format: function (ms) {
+            if (!ms) {
+                return "";
+            }
+            var date = getDate(ms);
+            var month = (date.getMonth() + 1);
+            return date.getFullYear() + "年" + (month >= 10 ? month : '0' + month) + "月" + date.getDate() + "日";
+        }
+    }
+</wxs>
+<van-field value="{{chooseCourse}}" is-link readonly label="课程" placeholder="点击选择课程" bindtap="onChoseCourse" />
+<van-popup show="{{showChooseCourse}}" position="bottom" bind:close="onChooseCourseClose">
+    <van-picker showToolbar columns="{{courses}}" bind:confirm="onConfirmCourse" bind:cancel="onChooseCourseClose" />
+</van-popup>
+<van-field value="{{chooseTeacher}}" is-link readonly label="老师" placeholder="点击选择老师" bindtap="onChoseTeacher" />
+<van-popup show="{{showChooseTeacher}}" position="bottom" bind:close="onChooseTeacherClose">
+    <van-picker showToolbar columns="{{teachers}}" bind:confirm="onConfirmTeacher" bind:cancel="onChooseTeacherClose" />
+</van-popup>
+<van-field value="{{choosePeoples}}" is-link readonly label="人数" placeholder="点击选择人数" bindtap="onChosePeoples" />
+<van-popup show="{{showChoosePeoples}}" position="bottom" bind:close="onChoosePeoplesClose">
+    <van-picker showToolbar columns="{{peoples}}" bind:confirm="onConfirmPeoples" bind:cancel="onChoosePeoplesClose" />
+</van-popup>
+<van-field value="{{chooseStartTime}}" is-link readonly label="开始时间" placeholder="点击选择开始时间" bindtap="onChoseStartTime" />
+<van-popup show="{{showChooseStartTime}}" position="bottom" bind:close="onChooseStartTimeClose">
+    <van-datetime-picker value="9:00" showToolbar bind:confirm="onConfirmStartTime" type="time" bind:cancel="onChooseStartTimeClose" />
+</van-popup>
+<van-field value="{{chooseEndTime}}" is-link readonly label="结束时间" placeholder="点击选择结束时间" bindtap="onChoseEndTime" />
+<van-popup show="{{showChooseEndTime}}" position="bottom" bind:close="onChooseEndTimeClose">
+    <van-datetime-picker value="10:00" title="选择课程结束时间" show-toolbar bind:confirm="onConfirmEndTime" type="time" bind:cancel="onChooseEndTimeClose" />
+</van-popup>
+<van-field value="{{format.format(chooseDateTime)}}" is-link readonly label="日期" placeholder="点击选择日期" bindtap="onChoseDateTime" />
+<van-popup show="{{showChooseDateTime}}" position="bottom" bind:close="onChooseDateTimeClose">
+    <van-datetime-picker value="10:00" title="选择课程日期" type="date" value="{{ currentDate }}" min-date="{{ minDate }}" formatter="{{ formatter }}" show-toolbar bind:confirm="onConfirmDateTime" bind:cancel="onChooseDateTimeClose" />
+</van-popup>
+<view style="display: flex;align-items: center;justify-content: center;padding:96rpx;">
+    <van-button type="primary" bindtap="submitCourse">提交课程</van-button>
+</view>
