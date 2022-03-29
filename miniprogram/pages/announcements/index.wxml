@@ -1,0 +1,12 @@
+<!--pages/announcements/index.wxml-->
+<wxs module="formattor">
+  module.exports = {
+    format: function (ms) {
+      var date = getDate(ms/10000);
+      var month=date.getMonth() + 1;
+      var day=date.getDate();
+      return date.getFullYear() + "-" + (month>=10?month:'0'+month)+ "-" +  (day>=10?day:'0'+day);
+    }
+  }
+</wxs>
+<van-cell title="{{item.title}}" wx:for="{{announcements}}" wx:key="id" value="{{formattor.format(item.updatedTime)}}" data-id="{{item.id}}"  bindtap="onItemClick"></van-cell>

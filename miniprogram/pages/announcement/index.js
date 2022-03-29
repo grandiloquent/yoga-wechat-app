@@ -1,4 +1,7 @@
 // pages/announcement/index.js
+const app = getApp()
+const share = require('../../share');
+
 Page({
 
     /**
@@ -10,13 +13,22 @@ Page({
 
     onLoad(options) {
         if (!options.id) {
-            this.setData({
-                src: 'https://lucidu.cn'
-            })
-        }else{
-            this.setData({
-                src: `https://lucidu.cn/article/${options.id}`
-            })
+           
+        } else {
+            const id = parseInt(options.id);
+            for (const iterator of app.globalData.yoga.announcements) {
+
+                if (iterator.id === id) {
+                    const time = new Date(iterator.updatedTime / 10000);
+                    this.setData({
+                        title: iterator.title,
+                        md: iterator.content,
+                        dateTime:`${time.getFullYear()}年${(time.getMonth()+1).toString().padStart(2,'0')}月${time.getDate().toString().padStart(2,'0')}日`
+                    });
+                    break;
+                }
+            }
+
         }
     },
 

@@ -1,2 +1,81 @@
 /* pages/appointment/index.wxss */
-/*  */
+.reserve {
+    background: #749b15;
+    font-size: 28rpx;
+    border-radius: 28rpx;
+    height: 56rpx;
+    line-height: 56rpx;
+    color: #fff;
+    padding: 0 48rpx;
+    min-width: 180rpx;
+}
+
+.reserve-disable {
+    background: #6c757d;
+    font-size: 28rpx;
+    border-radius: 28rpx;
+    height: 56rpx;
+    line-height: 56rpx;
+    color: #fff;
+    padding: 0 48rpx;
+}
+
+/*预约餐厅   */
+
+.thumbnail {
+    width: 120rpx;
+    height: 120rpx;
+    border-radius: 50%;
+    border: 1rpx solid #ccc;
+    margin-bottom: 48rpx;
+}
+
+.right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.course {
+    display: flex;
+    background: #fff;
+    border-radius: 24rpx;
+    padding: 24rpx;
+    color: #888;
+    font-size: 26rpx;
+    margin-bottom: 20rpx;
+}
+
+.left {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+
+.course-name {
+    font-size: 36rpx;
+    padding: 12rpx 0;
+    color: #333;
+}
+
+.daily-schedule {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    font-size: 24rpx;
+    padding: 24rpx;
+    background: #fff;
+}
+
+.daily-schedule-item {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 12rpx 0;
+}
+
+.daily-schedule-day {
+    font-size: 36rpx;
+    padding: 8rpx 0;
+}

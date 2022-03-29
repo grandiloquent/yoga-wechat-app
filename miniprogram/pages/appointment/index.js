@@ -1,88 +1,90 @@
 // pages/appointment/index.js
 const share = require("../../share");
+const app = getApp()
 
 Page({
-
-    /**
-     * 页面的初始数据
-     */
     data: {
         selected: 0,
-        courses: [{
-            startTime: "9:00",
-            endTime: "10:00",
-            teacher: "欧阳老师",
-            maxPeoples: 10,
-            courseName: "普拉提",
-            image: "../../images/pilates.jpg"
-        }, {
-            startTime: "14:00",
-            endTime: "15:00",
-            teacher: "欧阳老师",
-            maxPeoples: 10,
-            courseName: "优雅仪态",
-            image: "../../images/elegant-demeanor.jpg"
-        }]
+        caches: {}
     },
+    onShareAppMessage: function () {},
+    async loadCourses(dateTime) {
+        // 调用云数据库
+        if (this.data.caches[dateTime]) {
+            this.setData({
+                courses: this.data.caches[dateTime]
+            })
+            return;
+        }
 
-
-    onLoad(options) {
+        let courses;
+        try {
+            const response = await share.request({
+                url: `https://lucidu.cn/api/courses?dateTime=${dateTime}&openId=${app.globalData.openid}`
+            });
+            courses = response.data;
+        } catch (error) {
+            console.log(error);
+        }
+        if (!courses) return;
+        let now = new Date();
+        const hour = now.getHours();
+        now.setHours(0, 0, 0, 0);
+        for (const course of courses) {
+            if (now.getTime() === dateTime && parseInt(course.startTime) < hour) {
+                course.disable = true;
+            }
+        }
+        this.data.caches[dateTime] = courses;
+        this.setData({
+            courses
+        })
+    },
+    async onDateTap(e) {
+        // Toggle selected date
+        this.setData({
+            selected: parseInt(e.currentTarget.dataset.id)
+        });
+        // Empty loaded courses to improve user experience
+        this.setData({
+            courses: {}
+        });
+        const time = e.currentTarget.dataset.time;
+        await this.loadCourses(new Date(time * 1000).setHours(0, 0, 0, 0));
+    },
+    async onLoad(options) {
         this.setData({
             dates: share.getDates()
         });
+        await this.loadCourses(new Date().setHours(0, 0, 0, 0));
     },
-
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面显示
-     */
-    onShow: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
-    onHide: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面卸载
-     */
-    onUnload: function () {
-
-    },
-
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    onPullDownRefresh: function () {
-
-    },
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function () {
-
-    },
-
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage: function () {
-
-    },
-    onDateTap(e) {
-        this.setData({
-            selected: parseInt(e.currentTarget.dataset.id)
+    onReserve(e) {
+        // Collect the data needed to book a course
+        const openId = app.globalData.openid;
+        const courseId = e.currentTarget.dataset.id;
+        const dateTime = e.currentTarget.dataset.time;
+        const object = {
+            openId,
+            courseId,
+            dateTime
+        };
+        wx.request({
+            url: 'https://lucidu.cn/api/reservation',
+            method: 'POST',
+            data: object,
+            success: async () => {
+                // Empty the cache
+                this.data.caches={};
+                // Clear the UI
+                this.setData({
+                    courses: {}
+                });
+                await this.loadCourses(dateTime);
+            }
         })
-    }
+    },
+    onReserved() {
+
+        console.log('onReserved');
+    },
 })

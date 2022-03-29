@@ -1,2 +1,36 @@
-<!--pages/checkIn/index.wxml-->
-<text>pages/checkIn/index.wxml</text>
+<wxs module="dateStylish">
+  module.exports = {
+    thumbnail: function (courseName) {
+      if (courseName === "普拉提") {
+        return "../../images/pilates.jpg";
+      } else if (courseName === "优雅仪态") {
+        return "../../images/elegant-demeanor.jpg";
+      }
+      return "../../images/elegant-demeanor.jpg";
+    }
+  }
+</wxs>
+<wxs module="formattor">
+  module.exports = {
+    format: function (ms) {
+      var date = getDate(ms);
+      var month = date.getMonth() + 1;
+      var day = date.getDate();
+      return date.getFullYear() + "年" + (month >= 10 ? month : '0' + month) + "月" + (day >= 10 ? day : '0' + day) + "日";
+    }
+  }
+</wxs>
+<view class="course" wx:for="{{courses}}" wx:key="_id">
+  <view class="left">
+    <text>{{item.startTime}}-{{item.endTime}}</text>
+    <text style="padding-top: 12rpx;">{{formattor.format(item.dateTime)}}</text>
+    <text class="course-name">{{item.courseName}}</text>
+    <text>{{item.teacher}}</text>
+  </view>
+  <view class="right">
+    <image class="thumbnail" src="{{dateStylish.thumbnail(item.courseName)}}"></image>
+    <!-- <button wx:if="{{item.disable}}" class="reserve-disable">已过期</button> -->
+    <button wx:if="{{!item.disable}}" data-id="{{item.id}}" data-time="{{item.dateTime}}" class="reserve" bindtap="onReserved">已预约</button>
+  </view>
+</view>
+<van-dialog id="van-dialog" />

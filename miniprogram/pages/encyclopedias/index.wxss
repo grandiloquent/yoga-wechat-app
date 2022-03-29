@@ -1,0 +1,6 @@
+/* pages/encyclopedias/index.wxss */
+
+.title{
+    font-size:32rpx;
+    font-weight: normal!important;
+}

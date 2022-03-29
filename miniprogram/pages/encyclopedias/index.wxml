@@ -1,0 +1,1 @@
+<van-card title="{{item.title}}" thumb="{{ item.thumb }}" wx:for="{{encyclopedias}}" wx:key="id" bindtap="onItemClick" data-id="{{item.id}}" title-class="title"/>

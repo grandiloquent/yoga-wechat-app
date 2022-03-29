@@ -3,35 +3,52 @@
   module.exports = {
     style: function (id, selected) {
       if (id == selected) {
-        return 'background: #749b15;color:#fff;border-top-left-radius:6rpx;border-bottom-left-radius:6rpx;'
-      } if (id === 6) {
+        if (id === 0) {
+          return 'background: #749b15;color:#fff;border-top-left-radius:6rpx;border-bottom-left-radius:6rpx;'
+        } else if (id === 6) {
+          return 'background: #749b15;color:#fff;border-top-right-radius:6rpx;border-bottom-right-radius:6rpx;'
+        } else {
+          return 'background: #749b15;color:#fff;';
+        }
+      } else if (id === 6) {
         return 'background: #f3f3f3; border-top-right-radius:6rpx;border-bottom-right-radius:6rpx;'
       } else {
         return 'background:#f3f3f3;';
       }
+    },
+    thumbnail: function (courseName) {
+      if (courseName === "普拉提") {
+        return "../../images/pilates.jpg";
+      } else if (courseName === "优雅仪态") {
+        return "../../images/elegant-demeanor.jpg";
+      }
+      return "../../images/elegant-demeanor.jpg";
+
     }
   }
 </wxs>
 <van-tabs v-model:active="activeName">
   <van-tab title="日课表" name="a">
-    <view style="display: grid;grid-template-columns: repeat(7,1fr);font-size: 24rpx;padding:24rpx;background: #fff;">
-      <view style="{{dateStylish.style(item.id,selected)}}width: 100%;display: flex;flex-direction: column;align-items: center;padding: 12rpx 0;" bindtap="onDateTap" data-time="{{item.time}}" wx:for="{{dates}}" wx:key="id" data-id="{{item.id}}">
+    <view class="daily-schedule">
+      <view class="daily-schedule-item" style="{{dateStylish.style(item.id,selected)}}" bindtap="onDateTap" data-time="{{item.time}}" wx:for="{{dates}}" wx:key="id" data-id="{{item.id}}">
         <text>{{item.week}}</text>
-        <text style="font-size: 36rpx;padding: 8rpx 0;">{{item.day}}</text>
+        <text class="daily-schedule-day">{{item.day}}</text>
         <text>{{item.month+1}}月</text>
       </view>
     </view>
     <view class="space"></view>
-    <view style="display: flex;background: #fff;border-radius: 24rpx;padding: 24rpx;color: #888;font-size: 26rpx;margin-bottom: 20rpx;" wx:for="{{courses}}">
-      <view style="display: flex;flex-direction: column;flex-grow: 1;">
+    <view class="course" wx:for="{{courses}}" wx:key="_id">
+      <view class="left">
         <text>{{item.startTime}}-{{item.endTime}}</text>
-        <text style="font-size: 36rpx;padding: 12rpx 0;color: #333;">{{item.courseName}}</text>
+        <text class="course-name">{{item.courseName}}</text>
         <text>{{item.teacher}}</text>
-        <text>还可以预约 {{item.maxPeoples}} 人</text>
+        <text wx:if="{{!item.disable}}">还可以预约 {{item.peoples}} 人</text>
       </view>
-      <view style="display: flex;flex-direction: column;align-items: center;">
-        <image style="width: 120rpx;height: 120rpx;border-radius: 50%;border:1rpx solid #ccc;margin-bottom: 48rpx;" src="{{item.image}}"></image>
-        <button style="background: #749b15;font-size: 28rpx;border-radius: 28rpx;height: 56rpx;line-height: 56rpx;color: #fff;padding: 0 48rpx;">预约</button>
+      <view class="right">
+        <image class="thumbnail" src="https://static.lucidu.cn/images/{{item.image}}"></image>
+        <button wx:if="{{item.disable}}" class="reserve-disable">已过期</button>
+        <button wx:elif="{{!item.disable && !item.reserved}}" data-id="{{item.id}}" data-time="{{item.dateTime}}" class="reserve" bindtap="onReserve">预约</button>
+        <button wx:elif="{{item.reserved}}" data-id="{{item.id}}" data-time="{{item.dateTime}}" class="reserve" bindtap="onReserved">已预约</button>
       </view>
     </view>
   </van-tab>

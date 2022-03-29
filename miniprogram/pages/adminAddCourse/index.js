@@ -196,14 +196,27 @@ Page({
             endTime,
             dateTime
         };
-        console.log(object);
         // setCourse
-        const res = await share.callFunction({
-            name: "setCourse",
-            data: {
-                data: object
-            }
-        });
-        console.log(res);
+        // const res = await share.callFunction({
+        //     name: "setCourse",
+        //     data: {
+        //         data: object
+        //     }
+        // });
+        const res = await share.request({
+            url:"https://lucidu.cn/api/course",
+            data:object,
+            header: {
+                'content-type': 'application/json' // 默认值
+              },
+              method:'POST'
+        })
+        wx.showToast({
+            "icon": "success",
+            title: "已成功设置课程"
+        })
+        // wx.switchTab({
+        //     url: "/pages/appointment/index",
+        // })
     },
 })

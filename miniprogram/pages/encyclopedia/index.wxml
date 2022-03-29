@@ -1,0 +1,6 @@
+<!--pages/announcement/index.wxml-->
+
+<view wx:if="{{md}}" style="background: #fff;padding: 24rpx;">
+    <view style="font-size: 48rpx;">{{title}}</view>
+    <wemark md="{{md}}" link highlight type="wemark"></wemark>
+</view>

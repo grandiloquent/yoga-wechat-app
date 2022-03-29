@@ -1,0 +1,7 @@
+<!--pages/discount/index.wxml-->
+<view wx:if="{{md}}" style="background: #fff;padding: 24rpx;">
+    <view style="font-size: 60rpx;margin:30rpx 0">{{title}}</view>
+    <view style="background: #fff;padding: 24rpx;">
+        <wemark md="{{md}}" link highlight type="wemark"></wemark>
+    </view>
+</view>

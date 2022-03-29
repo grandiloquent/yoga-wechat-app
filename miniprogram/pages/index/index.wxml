@@ -9,8 +9,10 @@
 <wxs module="formattor">
   module.exports = {
     format: function (ms) {
-      var date = getDate(ms * 1000);
-      return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+      var date = getDate(ms/10000);
+      var month=date.getMonth() + 1;
+      var day=date.getDate();
+      return date.getFullYear() + "-" + (month>=10?month:'0'+month)+ "-" +  (day>=10?day:'0'+day);
     }
   }
 </wxs>
@@ -47,8 +49,8 @@
     </view>
   </view>
 </view>
-<view class="notice-box" wx:if="{{noticeList}}">
-  <van-notice-bar mode="link" text="{{ noticeList.title }}" background="#FFFFFF" scrollable="true" speed="30" bind:click="goNotice">
+<view class="notice-box" wx:if="{{yoga}}">
+  <van-notice-bar mode="link" text="{{yoga.discountTitle }}" background="#FFFFFF"  speed="30" bind:click="goNotice">
     <image slot="left-icon" class="notice-icon" src="../../images/notice.png"></image>
   </van-notice-bar>
 </view>
@@ -58,14 +60,14 @@
   <van-divider custom-class="table-text" contentPosition="center">
     <image class="table-icon" src="../../images/yoga.png"></image> 专业教练
   </van-divider>
-  <view class="professional-coach-container">
-    <view class="professional-coach-item" wx:for="{{coachs}}">
-      <image class="professional-coach-thumbnail" src="{{item.thumbnail}}"></image>
+  <view class="professional-coach-container" >
+    <view class="professional-coach-item" wx:for="{{yoga.coaches}}" wx:key="id">
+      <image class="professional-coach-thumbnail" src="https://static.lucidu.cn/images/{{item.thumbnail}}"></image>
       <view class="professional-coach-title">
-        <text >{{item.teacherName}}</text>
+        <text>{{item.name}}</text>
         <text class="professional-coach-type">（{{item.type}}）</text>
       </view>
-      <text class="professional-coach-description">{{item.description}}</text>
+      <text class="professional-coach-description">{{item.introduction}}</text>
     </view>
   </view>
 </view>
@@ -76,9 +78,9 @@
     <image class="table-icon" src="../../images/announcement.png"></image> 公告
   </van-divider>
   <view style="display: flex;margin:0 32rpx;flex-direction: column;">
-    <view style="font-size: 28rpx;display: flex;justify-content: space-between;margin:12rpx 0;" wx:for="{{announcements}}" data-id="{{item.id}}" bindtap="onAnnouncement">
-      <text>{{item.title}}</text>
-      <text style="color: #ccc;">{{formattor.format(item.updateAt)}}</text>
+    <view style="font-size: 28rpx;display: flex;justify-content: space-between;margin:12rpx 0;" wx:for="{{yoga.announcements}}" wx:key="id" data-id="{{item.id}}"  bindtap="onAnnouncement">
+      <text style="display: -webkit-box;-webkit-line-clamp: 1;-webkit-box-orient: vertical; overflow: hidden;">{{item.title}}</text>
+      <text style="color: #ccc;flex-shrink:0">{{formattor.format(item.updatedTime)}}</text>
     </view>
   </view>
 </view>
@@ -88,11 +90,17 @@
   <van-divider custom-class="table-text" contentPosition="center">
     <image class="table-icon" src="../../images/contact-us.png"></image> 联系我们
   </van-divider>
-  <view style="display: flex;margin:0 32rpx;flex-direction: column;color: #333;">
-    <text style="font-size: 28rpx;">姓名：张三</text>
-    <text style="font-size: 28rpx;">电话：188666888</text>
-    <text style="font-size: 28rpx;">地址：湖南省长沙市望城区100号</text>
+  <view style="display: flex;margin:0 32rpx;flex-direction: column;color: #333;padding-bottom: 24rpx;">
+    <text style="font-size: 28rpx;">姓名：{{yoga.name}}</text>
+    <text style="font-size: 28rpx;">电话：{{yoga.phoneNumber}}</text>
+    <text style="font-size: 28rpx;">地址：{{yoga.address}}</text>
   </view>
+  <!-- <map longitude="112.900215" latitude="28.296223">
+    <cover-view slot="callout">
+      <cover-view marker-id="1"></cover-view>
+      <cover-view marker-id="2"></cover-view>
+    </cover-view>
+  </map> -->
 </view>
 
 <view style="height: 32rpx;"></view>

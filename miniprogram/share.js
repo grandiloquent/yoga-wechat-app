@@ -25,8 +25,15 @@ function getDates() {
     }
     return dates;
 }
+  function getTodayTimestamp(now) {
+    now.setHours(0, 0, 0, 0);
+    return now.getTime();
+}
 module.exports = {
     request: promisify(wx.request),
     callFunction: promisify(wx.cloud.callFunction),
-    getDates
+    getUserProfile: promisify(wx.getUserProfile),
+    getStorage: promisify(wx.getStorage),
+    getDates,
+    getTodayTimestamp
 };

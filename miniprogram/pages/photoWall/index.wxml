@@ -1,0 +1,12 @@
+<view style="display: flex;justify-content: space-between;">
+    <view style="width:calc(50% - 24rpx);padding: 16rpx 8rpx 16rpx 16rpx;">
+        <view wx:for="{{pictruesLeft}}" style="width: 100%;display: inline-block;margin-bottom: 8rpx;" bindtap="onPreviewImage" data-src="{{item.src}}">
+            <image style="border-radius:32rpx;width: 100%;" wx:key="{{id}}" src="{{item.src}}" mode="widthFix"></image>
+        </view>
+    </view>
+    <view style="width:calc(50% - 24rpx);padding: 16rpx 16rpx 16rpx 8rpx;">
+        <view wx:for="{{pictruesRight}}" style="width: 100%;display: inline-block;margin-bottom: 8rpx;" bindtap="onPreviewImage" data-src="{{item.src}}">
+            <image style="border-radius: 32rpx;width: 100%;" wx:key="{{id}}" src="{{item.src}}" mode="widthFix"></image>
+        </view>
+    </view>
+</view>
