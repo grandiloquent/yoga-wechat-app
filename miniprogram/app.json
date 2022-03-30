@@ -1,6 +1,7 @@
 {
     "pages": [
         "pages/index/index",
+        "pages/ui/index",
         "pages/photoWall/index",
         "pages/checkIn/index",
         "pages/settings/index",

@@ -25,9 +25,18 @@ function getDates() {
     }
     return dates;
 }
-  function getTodayTimestamp(now) {
+
+function getTodayTimestamp(now) {
     now.setHours(0, 0, 0, 0);
     return now.getTime();
+}
+
+function boundingClientRect(selector) {
+    return new Promise((resolve, reject) => {
+        wx.createSelectorQuery().select(selector).boundingClientRect(function (rect) {
+            resolve(rect);
+        }).exec()
+    })
 }
 module.exports = {
     request: promisify(wx.request),
@@ -35,5 +44,6 @@ module.exports = {
     getUserProfile: promisify(wx.getUserProfile),
     getStorage: promisify(wx.getStorage),
     getDates,
-    getTodayTimestamp
+    getTodayTimestamp,
+    boundingClientRect
 };

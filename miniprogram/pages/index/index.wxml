@@ -49,12 +49,26 @@
     </view>
   </view>
 </view>
-<view class="notice-box" wx:if="{{yoga}}">
+
+<!-- <view class="notice-box" wx:if="{{yoga}}">
   <van-notice-bar mode="link" text="{{yoga.discountTitle }}" background="#FFFFFF"  speed="30" bind:click="goNotice">
     <image slot="left-icon" class="notice-icon" src="../../images/notice.png"></image>
   </van-notice-bar>
+</view> -->
+<view class="sliding-layout">
+    <view class="sliding-container">
+        <view class="sliding-wrapper" style="{{style}}">
+            <view class="sliding-item" wx:for="{{market}}">
+                <image class="sliding-image" src="{{item.image}}">
+                </image>
+                <view class="sliding-right">
+                    <text class="sliding-title">{{item.title}}</text>
+                </view>
+                <button class="sliding-marketing-button" bindtap="onBookClass">预约课程</button>
+            </view>
+        </view>
+    </view>
 </view>
-
 <view class="space"></view>
 <view class="professional-coach">
   <van-divider custom-class="table-text" contentPosition="center">

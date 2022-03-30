@@ -1,0 +1,15 @@
+<!--pages/ui/index.wxml-->
+<view class="sliding-layout">
+    <view class="sliding-container">
+        <view class="sliding-wrapper" style="{{style}}">
+            <view class="sliding-item">
+                <image class="sliding-image" src="https://thirdwx.qlogo.cn/mmopen/vi_32/PiajxSqBRaEKDtyYCrMXnmP3V2e3BhgzuOIXUpYicdw6UfDRZsOicZIToicXZicgyEeDTmicI28CeKpIWTFyjDiaU9IYQ/132">
+                </image>
+                <view class="sliding-right">
+                    <text class="sliding-title">陈陈已预约课程</text>
+                </view>
+                <button class="sliding-marketing-button">预约课程</button>
+            </view>
+        </view>
+    </view>
+</view>

@@ -55,9 +55,46 @@ Page({
     app.globalData.yoga = response.data;
     this.setData({
       yoga: response.data
+    });
+    this.setData({
+      market: [{
+        image: "https://thirdwx.qlogo.cn/mmopen/vi_32/L6SG55UJpKRHlk15ibtm7icF9MyhgBcG0flZZNicq4Jrxs3bMT2QkRo0DJNXf445DDPwJwy3Hl98YSVicicg0Nvysdg/132",
+        title: "萧大侠已预约课程"
+      }, {
+        image: "https://thirdwx.qlogo.cn/mmopen/vi_32/L6SG55UJpKRHlk15ibtm7icF9MyhgBcG0flZZNicq4Jrxs3bMT2QkRo0DJNXf445DDPwJwy3Hl98YSVicicg0Nvysdg/132",
+        title: "潇洒哥已预约课程"
+      }, {
+        image: "https://thirdwx.qlogo.cn/mmopen/vi_32/PiajxSqBRaEJVJ3bu5nDiblEmjaUS6ZPEDYvL5j9zlV94rdqIS499bTEDibUricx3gy53s96BOlAwujE4nqyEuMI6g/132",
+        title: "陈陈已预约课程"
+      }]
+    });
+    const rect = await share.boundingClientRect('.sliding-container');
+    const height = rect.height;
+    let index = 0;
+    let max = 4;
+    setInterval(() => {
+      let count;
+      if (index < max / 2)
+        count = (-height * (index + 1));
+      else if (index === max - 1) {
+        count = 0
+      } else {
+        count = (-height * (index % 2 + 1));
+      }
+      if (index + 1 < max)
+        index++;
+      else
+        index = 0;
+      this.setData({
+        style: `transform: translateY(${count}px)`
+      })
+    }, 3000);
+  },
+  onBookClass() {
+    wx.switchTab({
+      url: '/pages/appointment/index',
     })
   },
-  
   tabClick(e) {
     const id = e.currentTarget.dataset.id;
     if (id === 1) {
@@ -76,19 +113,19 @@ Page({
         url: '/pages/announcements/index',
       })
     } else
-    if (id === 4  ) {
+    if (id === 4) {
       wx.navigateTo({
         url: '/pages/notFound/index',
       })
-    }else  if (id === 5 ) {
+    } else if (id === 5) {
       wx.navigateTo({
         url: '/pages/videoLessons/index',
       })
-    } else{
+    } else {
       wx.navigateTo({
         url: "/pages/photoWall/index"
       })
-      
+
     }
   },
   onAnnouncement(e) {

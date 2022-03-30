@@ -165,3 +165,61 @@ page {
 .professional-coach-type {
   color: #749b15;
 }
+.sliding-container {
+  height: 96rpx;
+  overflow: hidden;
+
+}
+
+.sliding-wrapper {
+  transition: transform 500ms linear
+}
+
+.sliding-item {
+  display: flex;
+  align-items: center;
+  color: rgba(0, 0, 0, .54);
+  height: 96rpx;
+  line-height: 40rpx;
+  width: 100%;
+  vertical-align: middle;
+  outline: 0;
+}
+
+.sliding-image {
+  width: 96rpx;
+  height: 96rpx;
+  vertical-align: middle;
+  flex-shrink: 0;
+  border-radius:50%;
+}
+
+.sliding-layout {
+  padding: 32rpx 32rpx;
+  background-color: #fff;
+}
+
+.sliding-right {
+  padding: 0 32rpx;
+  width: 100%;
+}
+
+.sliding-title {
+  -webkit-box-orient: vertical;
+  color: #202124;
+  display: -webkit-box;
+  font-size: 32rpx;
+  line-height: 40rpx;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sliding-marketing-button {
+  flex-shrink: 0;
+  border: 2rpx solid #dadce0;
+  font-size: 28rpx;
+  line-height: 64rpx;
+  height: 64rpx;
+  border-radius: 60rpx;
+}
