@@ -6,13 +6,11 @@ Page({
     data: {
         userStatus: 1
     },
-    /**
-     * 生命周期函数--监听页面加载
-     */
+
     async onLoad(options) {
-        wx.setNavigationBarTitle({
-            title: '会员中心',
-        })
+        if (!this.checkOpenId()) {
+            return;
+        }
         const response = await share.request({
             url: `https://lucidu.cn/api/user/${app.globalData.openid}`
         });
@@ -28,8 +26,20 @@ Page({
             })
         }
     },
-
+    checkOpenId() {
+        if (!app.globalData.openid) {
+            wx.showToast({
+                title: "无法获取用户ID",
+                icon: "error"
+            });
+            return false;
+        }
+        return true;
+    },
     async updateUserInfo() {
+        if (!this.checkOpenId()) {
+            return;
+        }
         try {
             const response = await share.getUserProfile({
                 lang: 'zh_CN',
@@ -47,7 +57,7 @@ Page({
                     nickName,
                     avatarUrl,
                     gender,
-                    openid:app.globalData.openid
+                    openid: app.globalData.openid
                 }
             });
             app.globalData.userInfo = response.userInfo
@@ -58,30 +68,5 @@ Page({
         } catch (error) {
             console.log(error);
         }
-        // wx.getUserProfile({
-        //     lang: 'zh_CN',
-        //     desc: '用于完善会员资料',
-        //     success: res => {
-        //         console.log(res.userInfo)
-        //         const {
-        //             nickName,
-        //             avatarUrl
-        //         } = res.userInfo;
-        //         this.setUserInfo(nickName, avatarUrl);
-
-        //     },
-        //     fail: err => {
-        //         console.log(err);
-        //         wx.showToast({
-        //             title: err.errMsg,
-        //             icon: 'none'
-        //         })
-        //     }
-        // })
-    },
-    onChange(event) {
-        this.setData({
-            activeNames: event.detail,
-        });
-    },
+    }
 })

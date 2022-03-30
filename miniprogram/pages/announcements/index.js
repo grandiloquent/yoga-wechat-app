@@ -3,7 +3,6 @@ const app = getApp()
 const share = require('../../share');
 Page({
     data: {
-
     },
     onLoad: function (options) {
         wx.setNavigationBarTitle({

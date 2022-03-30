@@ -1,4 +1,4 @@
-<!--index.wxml-->
+<!-- index.wxml -->
 <!-- <view class="weather-container">
     <text class="weather-location">{{weather.location}}</text>
     <text>{{weather.weather}}</text>
@@ -37,44 +37,43 @@
 </view>
 <view class="category-container">
   <view class="category-box">
-    <view class="category-list" wx:for="{{categories}}" wx:key="id">
+    <view class="category-list" wx:for="{{yoga.functions}}" wx:key="id">
       <view class="category-column" bindtap="tabClick" data-id="{{item.id}}" wx:if="{{item.id != 8}}">
-        <image mode="aspectFill" class="category-imgbox" src="{{item.icon}}"></image>
+        <image mode="aspectFill" class="category-imgbox" src="{{item.image}}"></image>
         <view class="category-title">{{item.name}}</view>
       </view>
       <button class="category-column" open-type="contact" data-id="{{item.id}}" wx:if="{{item.id === 8}}" style="display: flex;flex-direction: column;align-items: center;padding: 0;">
-        <image mode="aspectFill" class="category-imgbox" src="{{item.icon}}"></image>
+        <image mode="aspectFill" class="category-imgbox" src="{{item.image}}"></image>
         <view class="category-title">{{item.name}}</view>
       </button>
     </view>
   </view>
 </view>
-
 <!-- <view class="notice-box" wx:if="{{yoga}}">
   <van-notice-bar mode="link" text="{{yoga.discountTitle }}" background="#FFFFFF"  speed="30" bind:click="goNotice">
     <image slot="left-icon" class="notice-icon" src="../../images/notice.png"></image>
   </van-notice-bar>
 </view> -->
 <view class="sliding-layout">
-    <view class="sliding-container">
-        <view class="sliding-wrapper" style="{{style}}">
-            <view class="sliding-item" wx:for="{{market}}">
-                <image class="sliding-image" src="{{item.image}}">
-                </image>
-                <view class="sliding-right">
-                    <text class="sliding-title">{{item.title}}</text>
-                </view>
-                <button class="sliding-marketing-button" bindtap="onBookClass">预约课程</button>
-            </view>
+  <view class="sliding-container">
+    <view class="sliding-wrapper" style="{{style}}">
+      <view class="sliding-item" wx:for="{{yoga.prompts}}">
+        <image class="sliding-image" src="{{item.image}}"></image>
+        <view class="sliding-right">
+          <text class="sliding-title">{{item.title}}</text>
         </view>
+        <button class="sliding-marketing-button" bindtap="onBookClass">预约课程</button>
+      </view>
     </view>
+  </view>
 </view>
 <view class="space"></view>
 <view class="professional-coach">
   <van-divider custom-class="table-text" contentPosition="center">
-    <image class="table-icon" src="../../images/yoga.png"></image> 专业教练
+    <image class="table-icon" src="../../images/yoga.png"></image>
+    专业教练
   </van-divider>
-  <view class="professional-coach-container" >
+  <view class="professional-coach-container">
     <view class="professional-coach-item" wx:for="{{yoga.coaches}}" wx:key="id">
       <image class="professional-coach-thumbnail" src="https://static.lucidu.cn/images/{{item.thumbnail}}"></image>
       <view class="professional-coach-title">
@@ -85,36 +84,19 @@
     </view>
   </view>
 </view>
-
 <view class="space"></view>
 <view style="background: #fff;padding-bottom: 12rpx;color: #333;">
   <van-divider custom-class="table-text" contentPosition="center">
-    <image class="table-icon" src="../../images/announcement.png"></image> 公告
+    <image class="table-icon" src="../../images/announcement.png"></image>
+    公告
   </van-divider>
   <view style="display: flex;margin:0 32rpx;flex-direction: column;">
-    <view style="font-size: 28rpx;display: flex;justify-content: space-between;margin:12rpx 0;" wx:for="{{yoga.announcements}}" wx:key="id" data-id="{{item.id}}"  bindtap="onAnnouncement">
-      <text style="display: -webkit-box;-webkit-line-clamp: 1;-webkit-box-orient: vertical; overflow: hidden;">{{item.title}}</text>
+    <view style="font-size: 28rpx;display: flex;justify-content: space-between;margin:12rpx 0;" wx:for="{{yoga.announcements}}" wx:key="id" data-id="{{item.id}}" bindtap="onAnnouncement">
+      <view style="display: -webkit-box;-webkit-line-clamp: 1;-webkit-box-orient: vertical; overflow: hidden;">
+        {{item.title}}
+      </view>
       <text style="color: #ccc;flex-shrink:0">{{formattor.format(item.updatedTime)}}</text>
     </view>
   </view>
 </view>
-
-<view class="space"></view>
-<view style="background: #fff;padding-bottom: 12rpx;">
-  <van-divider custom-class="table-text" contentPosition="center">
-    <image class="table-icon" src="../../images/contact-us.png"></image> 联系我们
-  </van-divider>
-  <view style="display: flex;margin:0 32rpx;flex-direction: column;color: #333;padding-bottom: 24rpx;">
-    <text style="font-size: 28rpx;">姓名：{{yoga.name}}</text>
-    <text style="font-size: 28rpx;">电话：{{yoga.phoneNumber}}</text>
-    <text style="font-size: 28rpx;">地址：{{yoga.address}}</text>
-  </view>
-  <!-- <map longitude="112.900215" latitude="28.296223">
-    <cover-view slot="callout">
-      <cover-view marker-id="1"></cover-view>
-      <cover-view marker-id="2"></cover-view>
-    </cover-view>
-  </map> -->
-</view>
-
 <view style="height: 32rpx;"></view>

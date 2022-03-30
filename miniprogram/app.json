@@ -1,12 +1,12 @@
 {
     "pages": [
         "pages/index/index",
+        "pages/announcement/index",
         "pages/ui/index",
         "pages/photoWall/index",
         "pages/checkIn/index",
         "pages/settings/index",
         "pages/encyclopedias/index",
-        "pages/announcement/index",
         "pages/appointment/index",
         "pages/user/index",
         "pages/discount/index",

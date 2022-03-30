@@ -31,6 +31,7 @@
     <image class="thumbnail" src="{{dateStylish.thumbnail(item.courseName)}}"></image>
     <!-- <button wx:if="{{item.disable}}" class="reserve-disable">已过期</button> -->
     <button wx:if="{{!item.disable}}" data-id="{{item.id}}" data-time="{{item.dateTime}}" class="reserve" bindtap="onReserved">已预约</button>
+    <button wx:else data-id="{{item.id}}" data-time="{{item.dateTime}}" class="reserve-disable">已完成</button>
   </view>
 </view>
 <van-dialog id="van-dialog" />
