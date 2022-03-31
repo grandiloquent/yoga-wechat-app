@@ -114,9 +114,10 @@ page {
 /* 专业教练 */
 .professional-coach {
   background: #fff;
-  padding-bottom: 12rpx;
+  /* padding-bottom: 12rpx; */
   color: #333;
 }
+
 .professional-coach-container {
   width: 100%;
   display: flex;
@@ -124,9 +125,11 @@ page {
   overflow-x: auto;
   padding-bottom: 24rpx;
 }
-.professional-coach-container::-webkit-scrollbar{
+
+.professional-coach-container::-webkit-scrollbar {
   display: none;
 }
+
 .professional-coach-item {
   width: 200rpx;
   display: flex;
@@ -165,6 +168,7 @@ page {
 .professional-coach-type {
   color: #749b15;
 }
+
 .sliding-container {
   height: 96rpx;
   overflow: hidden;
@@ -191,11 +195,11 @@ page {
   height: 96rpx;
   vertical-align: middle;
   flex-shrink: 0;
-  border-radius:50%;
+  border-radius: 50%;
 }
 
 .sliding-layout {
-  padding: 32rpx 32rpx;
+  padding: 32rpx;
   background-color: #fff;
 }
 
@@ -222,4 +226,17 @@ page {
   line-height: 64rpx;
   height: 64rpx;
   border-radius: 60rpx;
+}
+
+.market-action {
+  width: 134rpx;
+  height: 48rpx;
+  background: #ff655d;
+  border-radius: 24rpx;
+  font-size: 24rpx;
+  color: #fff;
+  line-height: 48rpx;
+  text-align: center;
+  margin-right: 24rpx;
+  background:linear-gradient(90deg, #FF973C 0%, #FC360C 100%)
 }

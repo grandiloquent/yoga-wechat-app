@@ -24,12 +24,14 @@ Page({
         const {
             nickName,
             phone,
-            address
+            address,
+            gender
         } = response.data;
         this.setData({
             nickName,
             phone,
-            address
+            address,
+            gender
         });
     },
 })

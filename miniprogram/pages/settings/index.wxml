@@ -1,6 +1,43 @@
-<!--pages/settings/index.wxml-->
-<van-cell-group>
-    <van-field label="昵称" value="{{ nickName }}" readonly />
-    <van-field label="手机号" value="{{ phone }}" placeholder="请输入手机号" />
-    <van-field label="地址" value="{{ address }}" placeholder="请输入地址" />
-</van-cell-group>
+<view class="user-container">
+    <view class="user-section">
+        <view class="user-row">
+            <view class="user-title">昵称</view>
+            <view class="user-value">
+                <text class="active-color">{{nickName}}</text>
+            </view>
+        </view>
+        <view class="user-row">
+            <view class="user-title">绑定手机</view>
+            <view class="user-value">
+                <text class="{{phone?'active-color':''}}">{{phone?phone:'未绑定'}}</text>
+                <image class="user-set" src="../../images/arrow-right.png"></image>
+            </view>
+        </view>
+    </view>
+    <view class="user-section section-gap">
+        <view class="user-row">
+            <view class="user-title">性别</view>
+            <view class="user-value">
+                <text class="active-color">{{gender?'女':'男'}}</text>
+            </view>
+        </view>
+        <view class="user-row">
+            <view class="user-title">地址</view>
+            <view class="user-value">
+                <text class="{{address?'active-color':''}}">{{address?address:'未设置'}}</text>
+            </view>
+        </view>
+    </view>
+
+    <button class="sign-out">保存</button>
+</view>
+
+<view class="alert">
+    <view class="alert-body">
+        <view class="alert-content">
+            <view class="alert-title">绑定新手机号码</view>
+            <view class="alert-tip">绑定新手机后需使用新手机号码进行登录</view>
+            <input maxlength="11" placeholder="请输入手机号" placeholderStyle="font-size:34upx;color:#ccc" type="number"></input>
+        </view>
+    </view>
+</view>

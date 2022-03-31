@@ -1,21 +1,22 @@
 {
     "pages": [
+        "pages/settings/index",
         "pages/index/index",
         "pages/announcement/index",
         "pages/ui/index",
         "pages/photoWall/index",
         "pages/checkIn/index",
-        "pages/settings/index",
         "pages/encyclopedias/index",
         "pages/appointment/index",
-        "pages/user/index",
         "pages/discount/index",
         "pages/notFound/index",
         "pages/adminAddCourse/index",
         "pages/encyclopedia/index",
         "pages/videoLessons/index",
         "pages/videoLesson/index",
+        "pages/user/index",
         "pages/announcements/index"
+
     ],
     "usingComponents": {
         "van-notice-bar": "@vant/weapp/notice-bar/index",

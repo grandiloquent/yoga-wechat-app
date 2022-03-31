@@ -14,6 +14,10 @@ Page({
     })
   },
   async onLoad() {
+    wx.showShareMenu({
+      withShareTicket: true,
+      menus: ['shareAppMessage', 'shareTimeline']
+    })
     const response = await share.request({
       url: 'https://lucidu.cn/api/yoga'
     });
@@ -92,6 +96,13 @@ Page({
   navigateToBookClass() {
     wx.switchTab({
       url: '/pages/appointment/index',
+    })
+  },
+  onShareAppMessage() {
+    wx.onShareAppMessage(() => {
+      return {
+        title: '瑜伽测试号'
+      }
     })
   }
 
