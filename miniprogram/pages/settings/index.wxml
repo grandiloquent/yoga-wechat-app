@@ -29,15 +29,19 @@
         </view>
     </view>
 
-    <button class="sign-out">保存</button>
+    <button class="sign-out" style="display: none;">保存</button>
 </view>
-
-<view class="alert">
-    <view class="alert-body">
+<view class="alert" wx:if="{{!hideDialog}}" bindtap="closeDialog">
+    <view class="alert-body" catchtap="capture">
         <view class="alert-content">
             <view class="alert-title">绑定新手机号码</view>
-            <view class="alert-tip">绑定新手机后需使用新手机号码进行登录</view>
-            <input maxlength="11" placeholder="请输入手机号" placeholderStyle="font-size:34upx;color:#ccc" type="number"></input>
+            <view class="alert-tip">手机号码将用于身份认证</view>
+            <input maxlength="11" placeholder="请输入手机号" placeholderStyle="font-size:34upx;color:#ccc" type="number" auto-focus="true"></input>
+        </view>
+
+        <view style="height: 112rpx;display: flex;border-top: 2rpx solid #dadce0;">
+            <button class="close" bindtap="closeDialog">取消</button>
+            <button class="confirm">确定</button>
         </view>
     </view>
 </view>

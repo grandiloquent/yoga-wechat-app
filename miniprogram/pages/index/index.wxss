@@ -1,7 +1,195 @@
 /**index.wxss**/
-
 page {
   background-color: #f6f6f6;
+}
+
+.category-box {
+  background-color: #fff;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  box-shadow: 0px 0px 18px 0px rgba(5, 5, 5, 0.15);
+  width: 700rpx;
+  margin-left: 25rpx;
+  border-radius: 10px;
+  padding: 20rpx 0;
+  position: inherit;
+}
+
+.category-column {
+  width: 100%;
+  margin-top: 20rpx;
+  overflow: hidden;
+}
+
+.category-container {
+  padding: 0 0 10px 0;
+  margin-top: 16rpx;
+  position: relative;
+  background-color: white;
+}
+
+.category-imgbox {
+  width: 100rpx;
+  height: 100rpx;
+}
+
+.category-list {
+  width: 140rpx;
+  text-align: center;
+  display: inline-block;
+  overflow: hidden;
+}
+
+.category-title {
+  font-size: 24rpx;
+  text-align: center;
+}
+
+.container {
+  background-color: #fff;
+  min-height: 100%;
+  display: block;
+}
+
+.market-action {
+  width: 134rpx;
+  height: 48rpx;
+  background: #ff655d;
+  border-radius: 24rpx;
+  font-size: 24rpx;
+  color: #fff;
+  line-height: 48rpx;
+  text-align: center;
+  margin-right: 24rpx;
+  background: linear-gradient(90deg, #FF973C 0%, #FC360C 100%)
+}
+
+.notice-box {
+  width: 100vw;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-bottom: 1rpx solid #efeff4;
+}
+
+.notice-icon {
+  width: 130rpx;
+  height: 33rpx;
+  margin-right: 10px;
+}
+
+/* 专业教练 */
+.professional-coach {
+  background: #fff;
+  /* padding-bottom: 12rpx; */
+  color: #333;
+}
+
+.professional-coach-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  padding-bottom: 56rpx;
+}
+
+.professional-coach-container::-webkit-scrollbar {
+  display: none;
+}
+
+.professional-coach-description {
+  font-size: 24rpx;
+  margin-top: 24rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  max-height: 2.5em;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  line-height: 1.25;
+  text-overflow: ellipsis;
+}
+
+.professional-coach-item {
+  width: 200rpx;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border-right: 1rpx solid #dadce0;
+  padding: 24rpx 36rpx;
+  flex-shrink: 0;
+}
+
+.professional-coach-thumbnail {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 50%;
+}
+
+.professional-coach-title {
+  display: flex;
+  font-size: 24rpx;
+  margin-top: 24rpx;
+}
+
+.professional-coach-type {
+  color: #749b15;
+}
+
+.sliding-container {
+  height: 96rpx;
+  overflow: hidden;
+}
+
+.sliding-image {
+  width: 96rpx;
+  height: 96rpx;
+  vertical-align: middle;
+  flex-shrink: 0;
+  border-radius: 50%;
+}
+
+.sliding-item {
+  display: flex;
+  align-items: center;
+  color: rgba(0, 0, 0, .54);
+  height: 96rpx;
+  line-height: 40rpx;
+  width: 100%;
+  vertical-align: middle;
+  outline: 0;
+}
+
+.sliding-layout {
+  padding: 32rpx;
+  background-color: #fff;
+}
+
+.sliding-marketing-button {
+  flex-shrink: 0;
+  border: 2rpx solid #dadce0;
+  font-size: 28rpx;
+  line-height: 64rpx;
+  height: 64rpx;
+  border-radius: 60rpx;
+}
+
+.sliding-right {
+  padding: 0 32rpx;
+  width: 100%;
+}
+
+.sliding-title {
+  -webkit-box-orient: vertical;
+  color: #202124;
+  display: -webkit-box;
+  font-size: 32rpx;
+  line-height: 40rpx;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sliding-wrapper {
+  transition: transform 500ms linear
 }
 
 .swiper-container {
@@ -23,6 +211,12 @@ page {
   /* border-radius: 16rpx; */
 }
 
+.table-icon {
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 18rpx;
+}
+
 .weather-container {
   width: calc(100% - 48rpx);
   display: flex;
@@ -33,210 +227,79 @@ page {
   color: rgb(100, 100, 100);
 }
 
-.weather-location {
-  color: rgb(100, 100, 100);
-  margin-right: 12rpx;
-}
-
 .weather-icon {
   height: 24rpx;
   width: 24rpx;
   margin-left: 6rpx;
 }
 
-.notice-box {
-  width: 100vw;
-  height: 80rpx;
-  line-height: 80rpx;
-  border-bottom: 1rpx solid #efeff4;
+.weather-location {
+  color: rgb(100, 100, 100);
+  margin-right: 12rpx;
 }
 
-.notice-icon {
-  width: 130rpx;
-  height: 33rpx;
-  margin-right: 10px;
-}
-
-.container {
-  background-color: #fff;
-  min-height: 100%;
-  display: block;
-}
-
-.category-container {
-  padding: 0 0 10px 0;
-  margin-top: 16rpx;
-  position: relative;
-  background-color: white;
-}
-
-.category-box {
-  background-color: #fff;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  box-shadow: 0px 0px 18px 0px rgba(5, 5, 5, 0.15);
-  width: 700rpx;
-  margin-left: 25rpx;
-  border-radius: 10px;
-  padding: 20rpx 0;
-  position: inherit;
-}
-
-.category-list {
-  width: 140rpx;
-  text-align: center;
-  display: inline-block;
-  overflow: hidden;
-}
-
-.category-column {
-  width: 100%;
-  margin-top: 20rpx;
-  overflow: hidden;
-}
-
-.category-imgbox {
-  width: 100rpx;
-  height: 100rpx;
-}
-
-.category-title {
-  font-size: 24rpx;
-  text-align: center;
-}
-
-.table-icon {
-  width: 40rpx;
-  height: 40rpx;
-  margin-right: 18rpx;
-}
-
-/* 专业教练 */
-.professional-coach {
-  background: #fff;
-  /* padding-bottom: 12rpx; */
-  color: #333;
-}
-
-.professional-coach-container {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  overflow-x: auto;
-  padding-bottom: 24rpx;
-}
-
-.professional-coach-container::-webkit-scrollbar {
-  display: none;
-}
-
-.professional-coach-item {
-  width: 200rpx;
+.divider {
   display: flex;
   align-items: center;
-  flex-direction: column;
-  border-right: 1rpx solid #dadce0;
-  padding: 24rpx 36rpx;
-  flex-shrink: 0;
-}
-
-.professional-coach-thumbnail {
-  width: 160rpx;
-  height: 160rpx;
-  border-radius: 50%;
-}
-
-
-.professional-coach-description {
-  font-size: 24rpx;
-  margin-top: 24rpx;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  max-height: 2.5em;
-  -webkit-line-clamp: 2;
-  overflow: hidden;
-  line-height: 1.25;
-  text-overflow: ellipsis;
-}
-
-.professional-coach-title {
-  display: flex;
-  font-size: 24rpx;
-  margin-top: 24rpx;
-}
-
-.professional-coach-type {
-  color: #749b15;
-}
-
-.sliding-container {
-  height: 96rpx;
-  overflow: hidden;
-
-}
-
-.sliding-wrapper {
-  transition: transform 500ms linear
-}
-
-.sliding-item {
-  display: flex;
-  align-items: center;
-  color: rgba(0, 0, 0, .54);
-  height: 96rpx;
-  line-height: 40rpx;
-  width: 100%;
-  vertical-align: middle;
-  outline: 0;
-}
-
-.sliding-image {
-  width: 96rpx;
-  height: 96rpx;
-  vertical-align: middle;
-  flex-shrink: 0;
-  border-radius: 50%;
-}
-
-.sliding-layout {
-  padding: 32rpx;
-  background-color: #fff;
-}
-
-.sliding-right {
-  padding: 0 32rpx;
-  width: 100%;
-}
-
-.sliding-title {
-  -webkit-box-orient: vertical;
-  color: #202124;
-  display: -webkit-box;
-  font-size: 32rpx;
-  line-height: 40rpx;
-  -webkit-line-clamp: 2;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.sliding-marketing-button {
-  flex-shrink: 0;
-  border: 2rpx solid #dadce0;
+  margin: 32rpx 0;
+  color: #969799;
   font-size: 28rpx;
-  line-height: 64rpx;
-  height: 64rpx;
-  border-radius: 60rpx;
+  line-height: 48rpx;
 }
 
-.market-action {
-  width: 134rpx;
-  height: 48rpx;
-  background: #ff655d;
-  border-radius: 24rpx;
-  font-size: 24rpx;
-  color: #fff;
-  line-height: 48rpx;
-  text-align: center;
-  margin-right: 24rpx;
-  background:linear-gradient(90deg, #FF973C 0%, #FC360C 100%)
+.divider1 {
+  -webkit-tap-highlight-color: transparent;
+  font-family: Open Sans, -apple-system, BlinkMacSystemFont, Helvetica Neue, Helvetica, Segoe UI, Arial, Roboto, PingFang SC, miui, Hiragino Sans GB, Microsoft Yahei, sans-serif;
+  -webkit-font-smoothing: antialiased;
+
+
+  border-color: #ebedf0;
+  border-style: solid;
+  border-width: 0;
 }
+
+.divider--hairline {
+  height: 1rpx;
+  background: #ebedf0;
+  margin-right: 32rpx;
+  flex: 1;
+}
+
+/*
+  <view class="divider">
+  </view>
+  */
+/*
+category-box
+category-column
+category-container
+category-imgbox
+category-list
+category-title
+market-action
+notice-box
+notice-icon
+professional-coach
+professional-coach-container
+professional-coach-description
+professional-coach-item
+professional-coach-thumbnail
+professional-coach-title
+professional-coach-type
+sliding-container
+sliding-image
+sliding-item
+sliding-layout
+sliding-marketing-button
+sliding-right
+sliding-title
+sliding-wrapper
+space
+swiper-container
+swiper1
+table-icon
+table-text
+weather-container
+weather-icon
+weather-location
+*/

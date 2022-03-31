@@ -1,15 +1,4 @@
-<wxs module="dateStylish">
-  module.exports = {
-    thumbnail: function (courseName) {
-      if (courseName === "普拉提") {
-        return "../../images/pilates.jpg";
-      } else if (courseName === "优雅仪态") {
-        return "../../images/elegant-demeanor.jpg";
-      }
-      return "../../images/elegant-demeanor.jpg";
-    }
-  }
-</wxs>
+
 <wxs module="formattor">
   module.exports = {
     format: function (ms) {
@@ -20,6 +9,7 @@
     }
   }
 </wxs>
+
 <view class="course" wx:for="{{courses}}" wx:key="_id">
   <view class="left">
     <text>{{item.startTime}}-{{item.endTime}}</text>
@@ -28,10 +18,38 @@
     <text>{{item.teacher}}</text>
   </view>
   <view class="right">
-    <image class="thumbnail" src="{{dateStylish.thumbnail(item.courseName)}}"></image>
+    <image class="thumbnail" src="https://static.lucidu.cn/images/{{item.image}}"></image>
     <!-- <button wx:if="{{item.disable}}" class="reserve-disable">已过期</button> -->
     <button wx:if="{{!item.disable}}" data-id="{{item.id}}" data-time="{{item.dateTime}}" class="reserve" bindtap="onReserved">已预约</button>
     <button wx:else data-id="{{item.id}}" data-time="{{item.dateTime}}" class="reserve-disable">已完成</button>
   </view>
 </view>
-<van-dialog id="van-dialog" />
+
+<view wx:if="{{!hideDialog}}">
+  <view class="overlay" bindtap="closeDialog"></view>
+  <view class="dialog">
+    <view class="dialog__header">
+      询问
+    </view>
+
+    <view class="dialog__content">
+      <view class="dialog__message">您确定要取消预约吗？</view>
+    </view>
+
+    <view class="dialog__footer dialog__border dialog__border--top">
+      <view class="dialog__button dialog__confirm dialog__border dialog__border--left" bindtap="confirmDialog" data-id="{{selectedId}}">
+        <view class="button__content">确定</view>
+      </view>
+      <view class="dialog__button dialog__close" bindtap="closeDialog">
+        <view class="button__content">取消</view>
+      </view>
+    </view>
+
+
+  </view>
+</view>
+
+<view wx:if="{{!courses}}" class="full-screen-centered-container">
+  <view class="book-message">没有找到您预约的课程</view>
+  <button class="book-button" bindtap="makeAppointment">马上预约课程</button>
+</view>

@@ -1,1 +1,6 @@
-<van-card title="{{item.title}}" thumb="{{ item.thumb }}" wx:for="{{encyclopedias}}" wx:key="id" bindtap="onItemClick" data-id="{{item.id}}" title-class="title"/>
+<view wx:for="{{encyclopedias}}"  wx:key="id"   bindtap="onItemClick" class="item-container">
+    <image class="image" src="{{ item.thumb }}" mode="aspectFit"></image>
+    <view class="item-title">
+        {{item.title}}
+</view>
+</view>

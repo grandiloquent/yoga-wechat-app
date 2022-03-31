@@ -59,16 +59,18 @@
     <view style="font-size: 28rpx;color: #777060;">送周卡、送瑜伽服、送减肥课程</view>
   </view>
   <view class="market-action">
-  <label>去看看</label>
+    <label>去看看</label>
   </view>
 </view>
 
 <view class="space"></view>
 <view class="professional-coach">
-  <van-divider custom-class="table-text" contentPosition="center">
+  <view class="divider" custom-class="table-text" contentPosition="center">
+    <view class="divider--hairline"></view>
     <image class="table-icon" src="../../images/yoga.png"></image>
-    专业教练
-  </van-divider>
+    <text>专业教练</text>
+    <view class="divider--hairline" style="margin:0 0 0 32rpx ;"></view>
+  </view>
   <view class="professional-coach-container">
     <view class="professional-coach-item" wx:for="{{yoga.coaches}}" wx:key="id">
       <image class="professional-coach-thumbnail" src="https://static.lucidu.cn/images/{{item.thumbnail}}"></image>
@@ -97,10 +99,13 @@
 </view>
 <view class="space"></view>
 <view style="background: #fff;padding-bottom: 12rpx;color: #333;">
-  <van-divider custom-class="table-text" contentPosition="center">
+  <view class="divider" custom-class="table-text" contentPosition="center">
+    <view class="divider--hairline"></view>
     <image class="table-icon" src="../../images/announcement.png"></image>
-    公告
-  </van-divider>
+    <text>公告</text>
+    <view class="divider--hairline" style="margin:0 0 0 32rpx ;"></view>
+  </view>
+
   <view style="display: flex;margin:0 32rpx;flex-direction: column;">
     <view style="font-size: 28rpx;display: flex;justify-content: space-between;margin:12rpx 0;" wx:for="{{yoga.announcements}}" wx:key="id" data-id="{{item.id}}" bindtap="onAnnouncement">
       <view style="display: -webkit-box;-webkit-line-clamp: 1;-webkit-box-orient: vertical; overflow: hidden;">

@@ -1,6 +1,5 @@
 const app = getApp()
 const share = require('../../share');
-import Dialog from '../../miniprogram_npm/@vant/weapp/dialog/dialog';
 
 async function readReservedCoursesFromServer() {
     let response;
@@ -19,17 +18,19 @@ function determineIfCourseIsOverdue(todayTimestamp, course, hour) {
         (todayTimestamp == course.dateTime && parseInt(course.startTime) < hour)
 }
 Page({
-    data: {},
-    onReserved() {
-        Dialog.confirm({
-            title: '询问',
-            message: '您确定要取消预约吗？',
-          }).then(() => {
-            // on close
-          });
+    data: {
+        hideDialog: true
+    },
+    onReserved(e) {
+        this.setData({
+            hideDialog: false,
+            selectedId: e.currentTarget.dataset.id
+        })
     },
     async onLoad(options) {
-        
+        await this.loadData();
+    },
+    async loadData() {
         let response = await readReservedCoursesFromServer();
         if (!response) {
             return;
@@ -45,4 +46,36 @@ Page({
             courses
         })
     },
+    closeDialog() {
+        this.setData({
+            hideDialog: true
+        })
+    },
+    makeAppointment() {
+        wx.switchTab({
+            url: '/pages/appointment/index',
+        })
+    },
+    async confirmDialog(e) {
+        const id = e.currentTarget.dataset.id;
+
+        let response;
+        try {
+            response = await share.request({
+                url: `https://lucidu.cn/api/reservation?id=${id}`,
+                method: 'DELETE'
+            });
+        } catch (error) {
+            console.error(error);
+        }
+        if (!response) {
+            return;
+        }
+
+        await this.loadData();
+
+        this.setData({
+            hideDialog: true
+        })
+    }
 })

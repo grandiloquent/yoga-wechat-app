@@ -5,9 +5,16 @@ const app = getApp()
 Page({
     data: {
         selected: 0,
-        caches: {}
+        caches: {},
+        dayScheduleActivated: false
     },
-    onShareAppMessage: function () {},
+    onShareAppMessage() {
+        wx.onShareAppMessage(() => {
+            return {
+                title: '瑜伽课表'
+            }
+        })
+    },
     async loadCourses(dateTime) {
         // 调用云数据库
         if (this.data.caches[dateTime]) {
@@ -16,7 +23,6 @@ Page({
             })
             return;
         }
-
         let courses;
         try {
             const response = await share.request({
@@ -52,7 +58,41 @@ Page({
         const time = e.currentTarget.dataset.time;
         await this.loadCourses(new Date(time * 1000).setHours(0, 0, 0, 0));
     },
+
+    clickDaySchedule() {
+        this.setData({
+            offset: this.dailySchedule,
+            dayScheduleActivated: true
+        })
+    },
+    clickMonthlySchedule() {
+        this.setData({
+            offset: this.monthlySchedule,
+            dayScheduleActivated: false
+        })
+    },
+    async calculateIndicatorPosition(){
+        const dailySchedule = await share.boundingClientRect('.tab-daily-schedule .tab__text');
+
+        const monthlySchedule = await share.boundingClientRect('.tab-monthly-schedule .tab__text');
+
+        this.dailySchedule = dailySchedule.left + dailySchedule.width / 2;
+        this.monthlySchedule = monthlySchedule.left + monthlySchedule.width / 2;
+    },
+    async initializeIndicator() {
+        if (this.data.dayScheduleActivated) {
+            this.setData({
+                offset: this.dailySchedule
+            })
+        } else {
+            this.setData({
+                offset: this.monthlySchedule
+            })
+        }
+    },
     async onLoad(options) {
+        this.calculateIndicatorPosition();
+        this.initializeIndicator();
         this.setData({
             dates: share.getDates()
         });
@@ -74,7 +114,7 @@ Page({
             data: object,
             success: async () => {
                 // Empty the cache
-                this.data.caches={};
+                this.data.caches = {};
                 // Clear the UI
                 this.setData({
                     courses: {}
@@ -84,7 +124,9 @@ Page({
         })
     },
     onReserved() {
-
-        console.log('onReserved');
+        
     },
+    onUnload() {
+        this.data.caches = {};
+    }
 })

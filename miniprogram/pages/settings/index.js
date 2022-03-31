@@ -1,15 +1,12 @@
-// pages/settings/index.js
 const app = getApp()
 const share = require('../../share');
 
 Page({
     data: {
-
+        hideDialog: true
     },
     async onLoad(options) {
-        wx.setNavigationBarTitle({
-            title: '设置用户信息'
-        })
+
         let response;
         try {
             response = await share.request({
@@ -34,4 +31,12 @@ Page({
             gender
         });
     },
+    closeDialog() {
+        this.setData({
+            hideDialog: true
+        })
+    },
+    capture() {
+
+    }
 })

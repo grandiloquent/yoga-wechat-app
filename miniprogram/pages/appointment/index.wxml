@@ -27,34 +27,50 @@
     }
   }
 </wxs>
-<van-tabs v-model:active="activeName">
-  <van-tab title="日课表" name="a">
-    <view class="daily-schedule">
-      <view class="daily-schedule-item" style="{{dateStylish.style(item.id,selected)}}" bindtap="onDateTap" data-time="{{item.time}}" wx:for="{{dates}}" wx:key="id" data-id="{{item.id}}">
-        <text>{{item.week}}</text>
-        <text class="daily-schedule-day">{{item.day}}</text>
-        <text>{{item.month+1}}月</text>
+
+<view class="tabs">
+  <view class="tabs__nav">
+    <view class="tab  tab-daily-schedule {{dayScheduleActivated?'tab--active':''}}" bindtap="clickDaySchedule">
+      <view class="tab__text">
+        日课表
       </view>
     </view>
-    <view class="space"></view>
-    <view class="course" wx:for="{{courses}}" wx:key="_id">
-      <view class="left">
-        <text>{{item.startTime}}-{{item.endTime}}</text>
-        <text class="course-name">{{item.courseName}}</text>
-        <text>{{item.teacher}}</text>
-        <text wx:if="{{!item.disable}}">还可以预约 {{item.peoples}} 人</text>
-      </view>
-      <view class="right">
-        <image class="thumbnail" src="https://static.lucidu.cn/images/{{item.image}}"></image>
-        <button wx:if="{{item.disable}}" class="reserve-disable">已过期</button>
-        <button wx:elif="{{!item.disable && !item.reserved}}" data-id="{{item.id}}" data-time="{{item.dateTime}}" class="reserve" bindtap="onReserve">预约</button>
-        <button wx:elif="{{item.reserved}}" data-id="{{item.id}}" data-time="{{item.dateTime}}" class="reserve" bindtap="onReserved">已预约</button>
+    <view class="tab tab-monthly-schedule" bindtap="clickMonthlySchedule">
+      <view class="tab__text">
+        月课表
       </view>
     </view>
-  </van-tab>
-  <van-tab title="周课表" name="b">
-    <view style="background: #fff; display: flex;align-items: center;padding: 48rpx;">
-      此功能正在筹建当中，敬请期待(*^_^*)
+
+
+    <view class="tabs__line" style="transform: translateX({{offset}}px) translateX(-50%);">
     </view>
-  </van-tab>
-</van-tabs>
+  </view>
+</view>
+
+<block wx:if="{{dayScheduleActivated}}">
+  <view class="daily-schedule">
+    <view class="daily-schedule-item" style="{{dateStylish.style(item.id,selected)}}" bindtap="onDateTap" data-time="{{item.time}}" wx:for="{{dates}}" wx:key="id" data-id="{{item.id}}">
+      <text>{{item.week}}</text>
+      <text class="daily-schedule-day">{{item.day}}</text>
+      <text>{{item.month+1}}月</text>
+    </view>
+  </view>
+  <view class="space"></view>
+  <view class="course" wx:for="{{courses}}" wx:key="_id">
+    <view class="left">
+      <text>{{item.startTime}}-{{item.endTime}}</text>
+      <text class="course-name">{{item.courseName}}</text>
+      <text>{{item.teacher}}</text>
+      <text wx:if="{{!item.disable}}">还可以预约 {{item.peoples}} 人</text>
+    </view>
+    <view class="right">
+      <image class="thumbnail" src="https://static.lucidu.cn/images/{{item.image}}"></image>
+      <button wx:if="{{item.disable}}" class="reserve-disable">已过期</button>
+      <button wx:elif="{{!item.disable && !item.reserved}}" data-id="{{item.id}}" data-time="{{item.dateTime}}" class="reserve" bindtap="onReserve">预约</button>
+      <button wx:elif="{{item.reserved}}" data-id="{{item.id}}" data-time="{{item.dateTime}}" class="reserve" bindtap="onReserved">已预约</button>
+    </view>
+  </view>
+</block>
+<block wx:else>
+你
+</block>

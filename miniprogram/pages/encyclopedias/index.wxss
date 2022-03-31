@@ -1,6 +1,33 @@
 /* pages/encyclopedias/index.wxss */
 
-.title{
-    font-size:32rpx;
-    font-weight: normal!important;
+.title {
+    font-size: 32rpx;
+    font-weight: normal !important;
+}
+
+.item-container {
+    display: flex;
+    padding: 32rpx;
+    border-top: 2rpx solid #ddd;
+}
+
+.image {
+    border-radius: 16rpx;
+    width: 270rpx;
+    height: 152rpx;
+    flex-shrink: 0;
+}
+
+.item-title {
+    margin-left: 32rpx;
+    font-size: 32rpx;
+    line-height: 40rpx;
+    /* color: #1558d6; */
+    color: #4d5156;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    word-break: break-word;
 }

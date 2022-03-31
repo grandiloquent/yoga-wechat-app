@@ -17,11 +17,4 @@
       <view class="nick">{{ userInfo.nickName }}</view>
     </view>
   </view>
-  <van-cell-group >
-    <van-cell is-link title="设置" link-type="navigateTo" url="/pages/settings/index" />
-  </van-cell-group>
-
-  <!-- <van-cell-group title="管理员">
-    <van-cell is-link title="设置课程" link-type="navigateTo" url="/pages/adminAddCourse/index" />
-  </van-cell-group> -->
 </block>

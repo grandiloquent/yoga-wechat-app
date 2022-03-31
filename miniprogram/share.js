@@ -38,6 +38,7 @@ function boundingClientRect(selector) {
         }).exec()
     })
 }
+
 module.exports = {
     request: promisify(wx.request),
     callFunction: promisify(wx.cloud.callFunction),
