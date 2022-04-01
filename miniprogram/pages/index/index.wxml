@@ -54,11 +54,11 @@
     <image slot="left-icon" class="notice-icon" src="../../images/notice.png"></image>
   </van-notice-bar>
 </view> -->
-<view style="height: 84rpx;background: url(https://static.lucidu.cn/images/sign_3.gif);background-size: 100%;padding: 0 8rpx 0 118rpx;display: flex;justify-content: flex-start;align-items: center;border-radius: 16rpx 16rpx 0 0;margin: 0 20rpx 0;background-repeat: no-repeat;">
+<view class="market-container" style="background-image: url({{host}}/images/sign_3.gif);">
   <view style="flex: 1">
-    <view style="font-size: 28rpx;color: #777060;">送周卡、送瑜伽服、送减肥课程</view>
+    <view class="market-title">送周卡、送瑜伽服、送减肥课程</view>
   </view>
-  <view class="market-action">
+  <view class="market-action" bindtap="openOfferInformation">
     <label>去看看</label>
   </view>
 </view>
@@ -87,7 +87,7 @@
 <view class="sliding-layout">
   <view class="sliding-container">
     <view class="sliding-wrapper" style="{{style}}">
-      <view class="sliding-item" wx:for="{{yoga.prompts}}">
+      <view class="sliding-item" wx:for="{{yoga.prompts}}" wx:key="id">
         <image class="sliding-image" src="{{item.image}}"></image>
         <view class="sliding-right">
           <text class="sliding-title">{{item.title}}</text>
@@ -106,15 +106,14 @@
     <view class="divider--hairline" style="margin:0 0 0 32rpx ;"></view>
   </view>
 
-  <view style="display: flex;margin:0 32rpx;flex-direction: column;">
-    <view style="font-size: 28rpx;display: flex;justify-content: space-between;margin:12rpx 0;" wx:for="{{yoga.announcements}}" wx:key="id" data-id="{{item.id}}" bindtap="onAnnouncement">
-      <view style="display: -webkit-box;-webkit-line-clamp: 1;-webkit-box-orient: vertical; overflow: hidden;">
+  <view class="announcement-list">
+    <view class="announcement-item" wx:for="{{yoga.announcements}}" wx:key="id" data-id="{{item.id}}" bindtap="onAnnouncement">
+      <view class="announcement-item-title">
         {{item.title}}
       </view>
-      <text style="color: #ccc;flex-shrink:0">{{formattor.format(item.updatedTime)}}</text>
+      <text class="announcement-item-subtitle">{{formattor.format(item.updatedTime)}}</text>
     </view>
   </view>
 </view>
-<view style="height: 60rpx;"></view>
-<view style="display: flex;justify-content: center;font-size: 22rpx;color: rgba(0, 0, 0, .35)">版权归瑜伽测试号所有</view>
-<view style="height: 32rpx;"></view>
+
+<view class="copyright">版权归瑜伽测试号所有</view>

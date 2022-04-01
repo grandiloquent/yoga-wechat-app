@@ -24,6 +24,12 @@
       }
       return "../../images/elegant-demeanor.jpg";
 
+    },
+    format: function (ms) {
+      var date = getDate(ms );
+      var month = date.getMonth() + 1;
+      var day = date.getDate();
+      return date.getFullYear() + "-" + (month >= 10 ? month : '0' + month) + "-" + (day >= 10 ? day : '0' + day);
     }
   }
 </wxs>
@@ -66,11 +72,49 @@
     <view class="right">
       <image class="thumbnail" src="https://static.lucidu.cn/images/{{item.image}}"></image>
       <button wx:if="{{item.disable}}" class="reserve-disable">已过期</button>
-      <button wx:elif="{{!item.disable && !item.reserved}}" data-id="{{item.id}}" data-time="{{item.dateTime}}" class="reserve" bindtap="onReserve">预约</button>
-      <button wx:elif="{{item.reserved}}" data-id="{{item.id}}" data-time="{{item.dateTime}}" class="reserve" bindtap="onReserved">已预约</button>
+      <button wx:elif="{{!item.disable && !item.reserved}}" data-id="{{item.id}}" data-time="{{item.dateTime}}" class="reserve" bindtap="bookCourse">预约</button>
+      <button wx:elif="{{item.reserved}}" data-id="{{item.reservedId}}" data-time="{{item.dateTime}}" class="reserve" bindtap="deleteCourse">已预约</button>
     </view>
   </view>
 </block>
 <block wx:else>
-你
+  <view class="course" wx:for="{{coursesMonth}}" wx:key="id">
+    <view class="left">
+      <text>{{dateStylish.format(item.dateTime)}}</text>
+      <text>{{item.startTime}}-{{item.endTime}}</text>
+      <text class="course-name">{{item.courseName}}</text>
+      <text>{{item.teacher}}</text>
+      
+    </view>
+    <view class="right">
+      <image class="thumbnail" src="https://static.lucidu.cn/images/{{item.image}}"></image>
+      <button wx:if="{{item.disable}}" class="reserve-disable">已过期</button>
+      <button wx:elif="{{!item.disable && !item.reserved}}" data-id="{{item.id}}" data-time="{{item.dateTime}}" class="reserve" bindtap="bookCourse">预约</button>
+      <button wx:elif="{{item.reserved}}" data-id="{{item.reservedId}}" data-time="{{item.dateTime}}" class="reserve" bindtap="deleteCourse">已预约</button>
+    </view>
+  </view>
 </block>
+
+<view wx:if="{{!hideDialog}}">
+  <view class="overlay" bindtap="closeDialog"></view>
+  <view class="dialog">
+    <view class="dialog__header">
+      询问
+    </view>
+
+    <view class="dialog__content">
+      <view class="dialog__message">您确定要取消预约吗？</view>
+    </view>
+
+    <view class="dialog__footer dialog__border dialog__border--top">
+      <view class="dialog__button dialog__confirm dialog__border dialog__border--right" bindtap="confirmDialog" data-id="{{selectedId}}">
+        <view class="button__content">确定</view>
+      </view>
+      <view class="dialog__button dialog__close" bindtap="closeDialog">
+        <view class="button__content">取消</view>
+      </view>
+    </view>
+
+
+  </view>
+</view>

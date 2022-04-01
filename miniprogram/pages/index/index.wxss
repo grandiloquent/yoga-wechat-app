@@ -189,7 +189,7 @@ page {
 }
 
 .sliding-wrapper {
-  transition: transform 500ms linear
+  transition: transform 300ms linear
 }
 
 .swiper-container {
@@ -247,17 +247,6 @@ page {
   line-height: 48rpx;
 }
 
-.divider1 {
-  -webkit-tap-highlight-color: transparent;
-  font-family: Open Sans, -apple-system, BlinkMacSystemFont, Helvetica Neue, Helvetica, Segoe UI, Arial, Roboto, PingFang SC, miui, Hiragino Sans GB, Microsoft Yahei, sans-serif;
-  -webkit-font-smoothing: antialiased;
-
-
-  border-color: #ebedf0;
-  border-style: solid;
-  border-width: 0;
-}
-
 .divider--hairline {
   height: 1rpx;
   background: #ebedf0;
@@ -303,3 +292,52 @@ weather-container
 weather-icon
 weather-location
 */
+.copyright {
+  display: flex;
+  justify-content: center;
+  font-size: 22rpx;
+  color: rgba(0, 0, 0, .35);
+  margin: 60rpx 0 32rpx 0;
+}
+
+.announcement-list {
+  display: flex;
+  margin: 0 32rpx;
+  flex-direction: column;
+}
+
+.announcement-item-title {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.announcement-item-subtitle {
+  color: #ccc;
+  flex-shrink: 0
+}
+
+.announcement-item {
+  font-size: 28rpx;
+  display: flex;
+  justify-content: space-between;
+  margin: 12rpx 0;
+}
+
+.market-container {
+  height: 84rpx;
+  background-size: 100%;
+  padding: 0 8rpx 0 118rpx;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: 16rpx 16rpx 0 0;
+  margin: 0 20rpx 0;
+  background-repeat: no-repeat;
+}
+
+.market-title {
+  font-size: 28rpx;
+  color: #777060;
+}

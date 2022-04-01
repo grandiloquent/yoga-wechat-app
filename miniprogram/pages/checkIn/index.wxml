@@ -37,7 +37,7 @@
     </view>
 
     <view class="dialog__footer dialog__border dialog__border--top">
-      <view class="dialog__button dialog__confirm dialog__border dialog__border--left" bindtap="confirmDialog" data-id="{{selectedId}}">
+      <view class="dialog__button dialog__confirm dialog__border dialog__border--right" bindtap="confirmDialog" data-id="{{selectedId}}">
         <view class="button__content">确定</view>
       </view>
       <view class="dialog__button dialog__close" bindtap="closeDialog">

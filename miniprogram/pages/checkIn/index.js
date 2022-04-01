@@ -27,15 +27,13 @@ Page({
             selectedId: e.currentTarget.dataset.id
         })
     },
-    async onLoad(options) {
-        await this.loadData();
-    },
     async loadData() {
         let response = await readReservedCoursesFromServer();
         if (!response) {
             return;
         }
         let courses = response.data;
+        
         let now = new Date();
         const hour = now.getHours();
         const todayTimestamp = share.getTodayTimestamp(now)
@@ -77,5 +75,12 @@ Page({
         this.setData({
             hideDialog: true
         })
+    },
+    // async onPullDownRefresh() {
+    //     await this.loadData();
+    //     // "enablePullDownRefresh": true
+    // },
+    async onShow() {
+        await this.loadData();
     }
 })

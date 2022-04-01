@@ -1,35 +1,17 @@
 // index.js
 const app = getApp()
 const share = require('../../share');
-Page({
-  data: {},
-  jumpPage(e) {
-    wx.navigateTo({
-      url: `/pages/${e.currentTarget.dataset.page}/index?envId=${this.data.selectedEnv.envId}`,
-    });
-  },
-  goNotice() {
-    wx.navigateTo({
-      url: '/pages/discount/index'
-    })
-  },
-  async onLoad() {
-    wx.showShareMenu({
-      withShareTicket: true,
-      menus: ['shareAppMessage', 'shareTimeline']
-    })
-    const response = await share.request({
-      url: 'https://lucidu.cn/api/yoga'
-    });
-    app.globalData.yoga = response.data;
-    this.setData({
-      yoga: response.data
-    });
+const api = require('../../api');
 
+Page({
+  data: {
+    host:app.globalData.host
+  },
+  async setScrolling() {
     const rect = await share.boundingClientRect('.sliding-container');
     const height = rect.height;
     let index = 0;
-    let max = response.data.prompts.length;
+    let max = app.globalData.yoga.prompts.length;
     let forward = true;
     setInterval(() => {
       if (!forward && index < 1) {
@@ -50,6 +32,20 @@ Page({
         style: `transform: translateY(${count}px)`
       })
     }, 3000);
+  },
+  async onLoad() {
+
+    wx.showShareMenu({
+      withShareTicket: true,
+      menus: ['shareAppMessage', 'shareTimeline']
+    })
+
+    app.globalData.yoga = (await api.fetchConfiguration(app)).data;
+    this.setData({
+      yoga: app.globalData.yoga
+    });
+
+    this.setScrolling();
   },
   onBookClass() {
     wx.switchTab({
@@ -76,9 +72,9 @@ Page({
       wx.navigateTo({
         url: '/pages/notFound/index',
       })
-    } else if (id === 5) {
+    } else if (id === 6) {
       wx.navigateTo({
-        url: '/pages/videoLessons/index',
+        url: "/pages/discount/index",
       })
     } else {
       wx.navigateTo({
@@ -103,6 +99,11 @@ Page({
       return {
         title: '瑜伽测试号'
       }
+    })
+  },
+  openOfferInformation() {
+    wx.navigateTo({
+      url: "/pages/discount/index",
     })
   }
 

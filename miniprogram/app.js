@@ -1,6 +1,7 @@
 // app.js
 const share = require('share.js');
 
+
 App({
   checkUpdate() {
     const updateManager = wx.getUpdateManager()
@@ -58,6 +59,7 @@ App({
     });
   },
   globalData: {
-    openid: null
+    openid: null,
+    host:'https://lucidu.cn'
   }
 });

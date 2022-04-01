@@ -38,7 +38,9 @@ function boundingClientRect(selector) {
         }).exec()
     })
 }
-
+function getDateTimestamp(){
+    return new Date().setHours(0, 0, 0, 0);
+}
 module.exports = {
     request: promisify(wx.request),
     callFunction: promisify(wx.cloud.callFunction),
@@ -46,5 +48,6 @@ module.exports = {
     getStorage: promisify(wx.getStorage),
     getDates,
     getTodayTimestamp,
-    boundingClientRect
+    boundingClientRect,
+    getDateTimestamp
 };

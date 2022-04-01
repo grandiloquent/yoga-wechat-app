@@ -218,8 +218,8 @@
 
 }
 
-.dialog__border--left:after {
-    border-left-width: 2rpx;
+.dialog__border--right:after {
+    border-right-width: 2rpx;
 }
 
 .dialog__border--top:after {
