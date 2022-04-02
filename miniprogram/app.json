@@ -1,7 +1,7 @@
 {
     "pages": [
-        "pages/appointment/index",
         "pages/index/index",
+        "pages/appointment/index",
         "pages/encyclopedias/index",
         "pages/checkIn/index",
         "pages/announcement/index",

@@ -9,6 +9,10 @@ function promisify(api) {
     }
 }
 
+function dataset(e, key) {
+    return e.currentTarget.dataset[key];
+}
+
 function getDates() {
     const dates = [];
     const weeks = ["周日", "周一", "周二", "周三", "周四", "周五", "周六"];
@@ -38,7 +42,8 @@ function boundingClientRect(selector) {
         }).exec()
     })
 }
-function getDateTimestamp(){
+
+function timestamp() {
     return new Date().setHours(0, 0, 0, 0);
 }
 module.exports = {
@@ -49,5 +54,6 @@ module.exports = {
     getDates,
     getTodayTimestamp,
     boundingClientRect,
-    getDateTimestamp
+    timestamp,
+    dataset
 };

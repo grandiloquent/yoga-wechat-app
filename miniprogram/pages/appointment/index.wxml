@@ -27,12 +27,12 @@
 
 <view class="tabs">
   <view class="tabs__nav">
-    <view class="tab  tab-daily-schedule {{dayScheduleActivated?'tab--active':''}}" bindtap="clickDaySchedule">
+    <view class="tab  tab-daily-schedule {{dayActive?'tab--active':''}}" bindtap="tapDay">
       <view class="tab__text">
         日课表
       </view>
     </view>
-    <view class="tab tab-monthly-schedule" bindtap="clickMonthlySchedule">
+    <view class="tab tab-monthly-schedule" bindtap="tapMonthly">
       <view class="tab__text">
         月课表
       </view>
@@ -44,9 +44,9 @@
   </view>
 </view>
 
-<block wx:if="{{dayScheduleActivated}}">
+<block wx:if="{{dayActive}}">
   <view class="daily-schedule">
-    <view class="daily-schedule-item" style="{{dateStylish.style(item.id,selected)}}" bindtap="onDateTap" data-time="{{item.time}}" wx:for="{{dates}}" wx:key="id" data-id="{{item.id}}">
+    <view class="daily-schedule-item" style="{{dateStylish.style(item.id,selected)}}" bindtap="tapDate" data-time="{{item.time}}" wx:for="{{dates}}" wx:key="id" data-id="{{item.id}}">
       <text>{{item.week}}</text>
       <text class="daily-schedule-day">{{item.day}}</text>
       <text>{{item.month+1}}月</text>
@@ -64,8 +64,8 @@
       <image class="thumbnail" src="https://static.lucidu.cn/images/{{item.image}}"></image>
       <button wx:if="{{item.peoples === 0}}" class="reserve-disable">已满员</button>
       <button wx:elif="{{item.disable}}" class="reserve-disable">已过期</button>
-      <button wx:elif="{{!item.disable && !item.reserved}}" data-id="{{item.id}}" data-time="{{item.dateTime}}" class="reserve" bindtap="bookCourse">预约</button>
-      <button wx:elif="{{item.reserved}}" data-id="{{item.reservedId}}" data-time="{{item.dateTime}}" class="reserve" bindtap="deleteCourse">已预约</button>
+      <button wx:elif="{{!item.disable && !item.reserved}}" data-id="{{item.id}}" data-time="{{item.dateTime}}" class="reserve" bindtap="book">预约</button>
+      <button wx:elif="{{item.reserved}}" data-id="{{item.reservedId}}" data-time="{{item.dateTime}}" class="reserve" bindtap="booked">已预约</button>
     </view>
   </view>
 </block>
@@ -81,8 +81,8 @@
     <view class="right">
       <image class="thumbnail" src="https://static.lucidu.cn/images/{{item.image}}"></image>
       <button wx:if="{{item.disable}}" class="reserve-disable">已过期</button>
-      <button wx:elif="{{!item.disable && !item.reserved}}" data-id="{{item.id}}" data-time="{{item.dateTime}}" class="reserve" bindtap="bookCourse">预约</button>
-      <button wx:elif="{{item.reserved}}" data-id="{{item.reservedId}}" data-time="{{item.dateTime}}" class="reserve" bindtap="deleteCourse">已预约</button>
+      <button wx:elif="{{!item.disable && !item.reserved}}" data-id="{{item.id}}" data-time="{{item.dateTime}}" class="reserve" bindtap="book">预约</button>
+      <button wx:elif="{{item.reserved}}" data-id="{{item.reservedId}}" data-time="{{item.dateTime}}" class="reserve" bindtap="booked">已预约</button>
     </view>
   </view>
 </block>
@@ -99,7 +99,7 @@
     </view>
 
     <view class="dialog__footer dialog__border dialog__border--top">
-      <view class="dialog__button dialog__confirm dialog__border dialog__border--right" bindtap="confirmDialog" data-id="{{selectedId}}">
+      <view class="dialog__button dialog__confirm dialog__border dialog__border--right" bindtap="confirm" data-id="{{selectedId}}">
         <view class="button__content">确定</view>
       </view>
       <view class="dialog__button dialog__close" bindtap="closeDialog">
@@ -112,7 +112,7 @@
 </view>
 
 
-<view class="dialog-container" style="position: fixed;top: 0;left: 0;right: 0;bottom: 0;display: flex;flex-direction: column;z-index: 100;">
+<view class="dialog-container" style="position: fixed;top: 0;left: 0;right: 0;bottom: 0;display: flex;flex-direction: column;z-index: 100;" wx:if="{{showVerify}}">
   <view class="dialog" style="position: relative;z-index: 2;display: flex;flex-direction: column;max-height: 100%;box-sizing: border-box;padding: 32rpx;overflow-x: hidden;overflow-y: auto;font-size: 26rpx;color: #030303;background-color: #fff;border: none;">
     <view class="" style="display: flex;-webkit-box-orient: vertical;-webkit-box-direction: normal;flex-direction: column;flex-shrink: 0;">
       <view class="h2" style="margin: 0 0 6rpx;display: -webkit-box;-webkit-box-orient: vertical;max-height: 2.5em;-webkit-line-clamp: 2;overflow: hidden;line-height: 1.25;text-overflow: ellipsis;font-weight: 400;font-size: 36rpx;">
@@ -123,11 +123,11 @@
 
     <view class="dialog-body" style="white-space: pre-wrap;overflow-y: auto;overflow-x: hidden;max-height: 100vh;">
       <view class="input-container">
-        <input class="input" placeholder="请输入手机号" value="{{phoneNumber}}" type="number" maxlength="11" bindinput="inputPhoneNumber"></input>
+        <input class="input" placeholder="请输入手机号" value="{{phoneNumber}}" type="number" maxlength="11" bindinput="inputPhone"></input>
       </view>
       <view class="input-container">
-        <input class="input" placeholder="请输入收到的验证码" maxlength="6"></input>
-        <view class="verify-code-btn {{verifyActive}}" bindtap="fetchVerifyCode">{{fetchVerifyCodeText}}</view>
+        <input class="input" type="number" placeholder="请输入收到的验证码" maxlength="6" bindinput="inputCode"></input>
+        <view class="verify-code-btn {{verifyActive}}" bindtap="code">{{codeText}}</view>
       </view>
     </view>
     <!-- <view class="dialog-buttons" style="flex-shrink: 0;display: flex;-webkit-box-align: center;align-items: center;-webkit-box-pack: end;justify-content: flex-end;margin-top: 24rpx;">
@@ -140,10 +140,10 @@
       </view>
 
     </view> -->
-    <view class="btn {{btnActive}}">登 录</view>
+    <view class="btn {{btnActive}}" bindtap="ver">验 证</view>
   </view>
 
-  <view class="c3-overlay" style="position: fixed;top: 0;bottom: 0;left: 0;right: 0;z-index: 1;cursor: pointer;background-color: rgba(0,0,0,0.8);">
+  <view bindtap="closeVer" class="c3-overlay" style="position: fixed;top: 0;bottom: 0;left: 0;right: 0;z-index: 1;cursor: pointer;background-color: rgba(0,0,0,0.8);">
     <view class="hidden-button" style="padding: 0;border: none;outline: none;font: inherit;text-transform: inherit;color: inherit;background: transparent;cursor: pointer;position: fixed;top: 0;left: 0;height: 2rpx;width: 2rpx;">
     </view>
 
