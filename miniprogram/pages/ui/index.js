@@ -11,28 +11,19 @@ Page({
 
 
     async onLoad(options) {
-        const rect = await share.boundingClientRect('.sliding-container');
-        const height = rect.height;
-        let index = 0;
-        let max =4;
-        setInterval(() => {
-            let count;
-            if (index < max / 2)
-                count = (-height * (index + 1));
-            else if (index === max - 1) {
-                count = 0
-            } else {
-                count = (-height * (index % 2 + 1));
-            }
-            if (index + 1 < max)
-                index++;
-            else
-                index = 0;
-            this.setData({
-                style: `transform: translateY(${count}px)`
-            })
-        }, 1000);
 
+        let rect = await share.boundingClientRect('.img-width');
+        this.slideImageWidth = rect.width;
+        this.smallWidth = rect.width / 5;
+
+        rect = await share.boundingClientRect('.slide-button');
+        this.maxMove = this.slideImageWidth + 12 - rect.width;
+
+        // wx.createSelectorQuery().select(".slide-button").boundingClientRect(function (e) {
+        //     e && (o = e.width, i.maxMove = i.slideImageWidth + 12 - o, i.allTime = 0, i.timer1 = setInterval(function () {
+        //         i.allTime = i.allTime + 10;
+        //     }, 10));
+        // }).exec();
     },
 
     /**
@@ -77,10 +68,33 @@ Page({
 
     },
 
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage: function () {
 
+    onShareAppMessage() {
+
+    },
+    touchstart(e) {
+        this.downX = e.touches[0].clientX;
+    },
+    touchmove(e) {
+        const offset = Math.min(e.touches[0].clientX - this.downX, this.maxMove);
+        const xOffset = Math.max(-6, offset - 6);
+
+        // var n = i,
+        //     o = i - 6;
+        // o < -6 && (o = -6, this.showTxt = !0), n < 0 && (n = 0), this.btnClientX = o, this.clientX = n;
+
+        this.setData({
+            btnClientX: xOffset
+        })
+    },
+    touchend(e) {
+        this.setData({
+            btnClientX: -6
+        })
+    },
+    closeDialog() {
+        this.setData({
+            hideDialog: true
+        })
     }
 })

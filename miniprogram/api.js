@@ -5,7 +5,6 @@ async function fetchConfiguration(app) {
         url: `${app.globalData.host}/api/yoga`
     });
 }
-
 async function fetchCourses(app, dateTime, endTime) {
     return await share.request({
         url: `${app.globalData.host}/api/courses?dateTime=${dateTime}&endTime=${endTime||0}&openId=${app.globalData.openid}`
@@ -17,12 +16,29 @@ async function fetchFullMonthCourses(app) {
     return await
     fetchCourses(app, share.getDateTimestamp(), date.setHours(0, 0, 0, 0))
 }
-
-async function sendReservationData(app,object) {
+async function fetchPictures(app, limit, offset) {
+    return await share.request({
+        url: `${app.globalData.host}/api/picture/all?limit=${limit}&offset=${offset}`
+    });
+}
+async function sendReservationData(app, object) {
     return await share.request({
         url: `${app.globalData.host}/api/reservation`,
         method: 'POST',
         data: object,
+    });
+}
+// 删除预约
+
+async function deleteReservation(app, id) {
+    return await share.request({
+        url: `${app.globalData.host}/api/reservation?id=${id}`,
+        method: 'DELETE'
+    });
+}
+async function fetchVerificationCode(app, phoneNumber) {
+    return await share.request({
+        url: `${app.globalData.host}/api/sms?openId=${app.globalData.openid}&token=${app.globalData.token}&phoneNumber=${ phoneNumber}`
     });
 }
 
@@ -30,5 +46,8 @@ module.exports = {
     fetchConfiguration,
     fetchCourses,
     fetchFullMonthCourses,
-    sendReservationData
+    sendReservationData,
+    fetchPictures,
+    deleteReservation,
+    fetchVerificationCode
 }

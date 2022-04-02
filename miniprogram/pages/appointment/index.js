@@ -9,7 +9,10 @@ Page({
         selected: 0,
         caches: {},
         dayScheduleActivated: true,
-        hideDialog: true
+        hideDialog: true,
+        phoneNumber: '',
+        fetchVerifyCodeText: '获取验证码',
+        counting: false
     },
     closeDialog() {
         this.setData({
@@ -20,7 +23,7 @@ Page({
         this.setData({
             hideDialog: false,
             selectedId: e.currentTarget.dataset.id,
-            selectedDateTime:e.currentTarget.dataset.time
+            selectedDateTime: e.currentTarget.dataset.time
         })
     },
     initializeIndicators() {
@@ -52,7 +55,6 @@ Page({
     },
     async bookCourse(e) {
         try {
-            console.log(e);
             let response = await api.sendReservationData(app, this.collectReservationData(e));
             if (this.data.dayScheduleActivated) {
                 const dateTime = e.currentTarget.dataset.time;
@@ -97,20 +99,7 @@ Page({
         await this.loadCourses(share.getDateTimestamp(), 1);
     },
     async confirmDialog(e) {
-        const id = e.currentTarget.dataset.id;
-        let response;
-        try {
-            response = await share.request({
-                url: `https://lucidu.cn/api/reservation?id=${id}`,
-                method: 'DELETE'
-            });
-            
-        } catch (error) {
-            console.error(error);
-        }
-        if (!response) {
-            return;
-        }
+        const result = await deleteReservation(app, e.currentTarget.dataset.id);
         if (this.data.dayScheduleActivated) {
             const dateTime = this.data.selectedDateTime;
             this.data.caches[dateTime] = null;
@@ -119,14 +108,11 @@ Page({
             });
             await this.loadCourses(dateTime);
         } else {
-            const date = new Date();
-            date.setDate(date.getDate() + 30);
-            const endTime = date.setHours(0, 0, 0, 0);
-            this.data.caches[endTime] = null;
+            this.data.caches[1] = null;
             this.setData({
                 coursesMonth: {}
             });
-            await this.loadCourses(share.getDateTimestamp(), endTime);
+            await this.loadCourses(share.getDateTimestamp(), 1);
         }
         this.setData({
             hideDialog: true
@@ -181,6 +167,7 @@ Page({
         await this.loadCourses(new Date(time * 1000).setHours(0, 0, 0, 0));
     },
     async onLoad(options) {
+
         await this.calculateIndicators();
         this.initializeIndicators();
         this.setData({
@@ -191,6 +178,10 @@ Page({
         } else {
             await this.loadCourses(share.getDateTimestamp(), 1);
         }
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
     },
     onShareAppMessage() {
         wx.onShareAppMessage(() => {
@@ -198,5 +189,51 @@ Page({
                 title: '瑜伽课表'
             }
         })
+    },
+    inputPhoneNumber(e) {
+        if (/^\d{11}$/.test(e.detail.value)) {
+            this.setData({
+                verifyActive: 'active',
+                phoneNumber: e.detail.value
+            })
+        }
+    },
+    setStartRequestVerificationCodeStatus() {
+        this.data.counting = true;
+        this.setData({
+            verifyActive: ''
+        });
+    },
+    setLimitReleasedStatus() {
+        this.data.counting = false;
+        this.setData({
+            verifyActive: 'active',
+            fetchVerifyCodeText: '获取验证码',
+        });
+    },
+
+    async fetchVerifyCode(e) {
+        if (!this.data.counting &&
+            this.data.verifyActive === 'active') {
+
+            this.setStartRequestVerificationCodeStatus();
+
+            let response = await api.fetchVerificationCode(app, this.data.phoneNumber);
+            console.log(response);
+            let count = 10;
+            this.setData({
+                fetchVerifyCodeText: `${count--}秒后重试`
+            })
+
+            const interval = setInterval(() => {
+                this.setData({
+                    fetchVerifyCodeText: `${count--}秒后重试`
+                })
+                if (count < 1) {
+                    clearInterval(interval);
+                    this.setLimitReleasedStatus();
+                }
+            }, 1000);
+        }
     }
 })

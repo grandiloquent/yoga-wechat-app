@@ -63,7 +63,7 @@
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     font-size: 24rpx;
-    padding:0 24rpx 24rpx;
+    padding: 0 24rpx 24rpx;
     background: #fff;
 }
 
@@ -136,7 +136,7 @@
 /*
  transform: translateX(45px) translateX(-50%);   
     */
-    
+
 .overlay {
     position: fixed;
     top: 0;
@@ -309,4 +309,61 @@
     line-height: 112rpx;
     width: 50vw;
     border: 2rpx solid #749b15;
+}
+
+
+.input-container {
+    margin-top: 40rpx;
+    padding: 20rpx 0;
+    border-bottom: 2rpx solid #efefef;
+    background: #fff;
+    height: 100rpx;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+}
+
+.input {
+    font-size: 32rpx;
+    height: 100%;
+    border: 0;
+}
+
+.verify-code-btn {
+    border-left: 1px solid #ccc;
+    font-size: 28rpx;
+    height: 46rpx;
+    line-height: 46rpx;
+    width: 218rpx;
+    color: rgba(0, 0, 0, .4);
+    text-align: center;
+}
+
+.verify-code-btn.enable {
+    color: #848689;
+}
+
+.verify-code-btn.active {
+    color: #e2231a;
+}
+
+::-webkit-input-placeholder {
+    color: rgba(0, 0, 0, .4)
+}
+
+.btn {
+    width: 100%;
+    height: 100rpx;
+    margin: 30rpx 0 30rpx;
+    background-color: #efefef;
+    border-radius: 50rpx;
+    text-align: center;
+    line-height: 100rpx;
+    font-size: 32rpx;
+    color: #fff;
+    background-image: linear-gradient(90deg, #fab3b3, #ffbcb3 73%, #ffcaba);
+}
+
+.btn.active {
+    background-image: linear-gradient(90deg, #f10000, #ff2000 73%, #ff4f18)
 }

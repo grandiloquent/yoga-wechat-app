@@ -1,6 +1,4 @@
 // app.js
-const share = require('share.js');
-
 
 App({
   checkUpdate() {
@@ -17,13 +15,53 @@ App({
       })
     })
   },
+  getAuthenticationToken(openid) {
+    if (!this.globalData.worker) {
+      return;
+    }
+    const {
+      brand,
+      model,
+      system,
+      platform,
+      SDKVersion
+    } = wx.getSystemInfoSync();
+    this.globalData.worker.postMessage({
+      brand,
+      model,
+      system,
+      platform,
+      SDKVersion,
+      openId: openid
+    })
+  },
   async onLaunch() {
+    try {
+      const token = await wx.getStorage({
+        key: 'token'
+      });
+      if (token.data) {
+        
+        this.globalData.token = token.data;
+      }
+    } catch (error) {
+      const worker = wx.createWorker('workers/request/index.js')
+      this.globalData.worker = worker;
+      worker.onMessage((res) => {
+        this.globalData.token = res.token;
+        wx.setStorage({
+          key: "token",
+          data: res.token
+        });
+      })
+    }
     try {
       const res = await wx.getStorage({
         key: 'openid'
       });
       if (res.data) {
         this.globalData.openid = res.data;
+        this.getAuthenticationToken(res.data);
         return;
       }
     } catch (error) {}
@@ -45,6 +83,7 @@ App({
       name: "login",
       success: res => {
         this.globalData.openid = res.result.openid;
+        this.getAuthenticationToken(this.globalData.openid);
         wx.setStorage({
           key: "openid",
           data: res.result.openid
@@ -60,6 +99,7 @@ App({
   },
   globalData: {
     openid: null,
-    host:'https://lucidu.cn'
+    host: 'https://lucidu.cn',
+    staticHost: 'https://static.lucidu.cn'
   }
 });

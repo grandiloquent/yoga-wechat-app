@@ -1,7 +1,5 @@
-// pages/discount/index.js
 const app = getApp()
-const share = require('../../share');
-
+const api = require('../../api');
 
 Page({
 
@@ -9,10 +7,7 @@ Page({
     async onLoad(options) {
 
         if (!app.globalData.yoga) {
-            const response = await share.request({
-                url: `${app.globalData.host}/api/yoga`
-            });
-            app.globalData.yoga = response.data
+            app.globalData.yoga = (await api.fetchConfiguration(app)).data;
         }
         this.setData({
             title: app.globalData.yoga.discountTitle,
@@ -26,5 +21,5 @@ Page({
             }
         })
     },
-  
+
 })

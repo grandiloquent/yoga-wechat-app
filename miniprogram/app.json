@@ -1,30 +1,30 @@
 {
     "pages": [
-        "pages/index/index",
         "pages/appointment/index",
+        "pages/index/index",
         "pages/encyclopedias/index",
         "pages/checkIn/index",
         "pages/announcement/index",
-        "pages/ui/index",
         "pages/photoWall/index",
         "pages/discount/index",
         "pages/notFound/index",
         "pages/encyclopedia/index",
         "pages/user/index",
+        "pages/ui/index",
         "pages/announcements/index"
     ],
     "usingComponents": {
-        
     },
     "window": {
         "backgroundColor": "#F6F6F6",
         "backgroundTextStyle": "light",
         "navigationBarBackgroundColor": "#F6F6F6",
-        "navigationBarTitleText": "晨蕴瑜伽",
+        "navigationBarTitleText": "瑜伽测试号",
         "navigationBarTextStyle": "black"
     },
     "sitemapLocation": "sitemap.json",
     "lazyCodeLoading": "requiredComponents",
+    "workers": "workers",
     "tabBar": {
         "color": "#8c8c8c",
         "selectedColor": "#749b15",
